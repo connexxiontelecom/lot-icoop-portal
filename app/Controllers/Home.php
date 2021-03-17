@@ -17,6 +17,14 @@ class Home extends BaseController {
 	  return redirect('auth/login');
 	}
 
+	function account_statement() {
+		if ($this->session->active) {
+			$page_data['page_title'] = 'Account Statement';
+			return view('account-statement/index', $page_data);
+		}
+		return redirect('auth/login');
+	}
+
 	private function _count_withdrawal_types($type): int {
 		$withdrawals = $this->withdrawModel->where('withdraw_staff_id', $this->session->get('staff_id'))->findAll();
 		$result = 0;

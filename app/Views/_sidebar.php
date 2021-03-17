@@ -1,4 +1,7 @@
-<?php $session = session(); ?>
+<?php
+  $session = session();
+  $uri = service('uri');
+?>
 <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
   <div class="nk-sidebar-element nk-sidebar-head">
     <div class="nk-sidebar-brand">
@@ -114,13 +117,13 @@
               <h6 class="overline-title">Menu</h6>
             </li>
             <li class="nk-menu-item">
-              <a href="<?= site_url()?>" class="nk-menu-link">
+              <a href="/dashboard" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-dashboard"></em></span>
                 <span class="nk-menu-text">Dashboard</span>
               </a>
             </li>
             <li class="nk-menu-item">
-              <a href="#" class="nk-menu-link">
+              <a href="/account-statement" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
                 <span class="nk-menu-text">Account Statement</span>
               </a>

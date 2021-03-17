@@ -42,7 +42,7 @@ class Auth extends BaseController {
 		      );
       		$this->session->set($user_data);
 		      $this->session->setFlashdata('login_success', 'You have logged in successfully!');
-		      return redirect('/');
+		      return redirect('dashboard');
 	      }
       } else {
       	print_r('Not Found');
