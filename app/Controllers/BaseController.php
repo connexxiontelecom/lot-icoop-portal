@@ -2,6 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Models\BankModel;
+use App\Models\CooperatorModel;
+use App\Models\DepartmentModel;
+use App\Models\LocationModel;
+use App\Models\PayrollGroupModel;
+use App\Models\StateModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -29,6 +35,13 @@ class BaseController extends Controller
 	 */
 	protected $helpers = ['form', 'url'];
 	protected $session;
+	protected $validation;
+	protected $bankModel;
+	protected $cooperatorModel;
+	protected $departmentModel;
+	protected $locationModel;
+	protected $payrollGroupModel;
+	protected $stateModel;
 
 	/**
 	 * Constructor.
@@ -45,6 +58,15 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-    $this->session = session();
+    // libraries
+    $this->session = \CodeIgniter\Config\Services::session();
+    $this->validation = \CodeIgniter\Config\Services::validation();
+    // models
+		$this->bankModel = new BankModel();
+    $this->cooperatorModel = new CooperatorModel();
+    $this->departmentModel = new DepartmentModel();
+    $this->locationModel = new LocationModel();
+    $this->payrollGroupModel = new PayrollGroupModel();
+    $this->stateModel = new StateModel();
 	}
 }

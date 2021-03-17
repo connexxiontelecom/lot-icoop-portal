@@ -204,9 +204,7 @@
                   </div><!-- .row -->
                 </div> <!-- .nk-block -->
               </div><!-- .col -->
-
             </div>
-
           </div>
           <div class="nk-block">
             <div class="card card-bordered">
@@ -237,7 +235,7 @@
                   <div class="nk-block-content">
                     <div class="nk-block-content-head px-lg-4">
                       <h5>We’re here to help you!</h5>
-                      <p class="text-soft">Ask a question or file a support ticket, manage request, report an issues. Our team support team will get back to you by email.</p>
+                      <p class="text-soft">Ask a question or file a support ticket, manage request, report an issues. Our support team will get back to you by email.</p>
                     </div>
                   </div>
                   <div class="nk-block-content flex-shrink-0">
