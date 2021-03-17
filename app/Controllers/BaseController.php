@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\BankModel;
+use App\Models\ContributionTypeModel;
 use App\Models\CooperatorModel;
 use App\Models\DepartmentModel;
 use App\Models\LocationModel;
@@ -37,6 +38,7 @@ class BaseController extends Controller
 	protected $session;
 	protected $validation;
 	protected $bankModel;
+	protected $contributionTypeModel;
 	protected $cooperatorModel;
 	protected $departmentModel;
 	protected $locationModel;
@@ -63,6 +65,7 @@ class BaseController extends Controller
     $this->validation = \CodeIgniter\Config\Services::validation();
     // models
 		$this->bankModel = new BankModel();
+		$this->contributionTypeModel = new ContributionTypeModel();
     $this->cooperatorModel = new CooperatorModel();
     $this->departmentModel = new DepartmentModel();
     $this->locationModel = new LocationModel();

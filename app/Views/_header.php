@@ -69,20 +69,19 @@
               <div class="dropdown-inner user-account-info">
                 <h6 class="overline-title-alt">Savings Balance</h6>
                 <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
-                <div class="user-balance-sub"><span><?= number_format($session->get('savings'),2, '.', ',') ?> <span class="currency currency-btc">per month</span></span></div>
-                <a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a>
+                <a href="#" class="link mt-2"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a>
               </div>
               <div class="dropdown-inner">
                 <ul class="link-list">
-                  <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                  <li><a href="html/crypto/profile-security.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                  <li><a href="html/crypto/profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                  <li><a href="#"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                  <li><a href="#"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                  <li><a href="#"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
                   <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                 </ul>
               </div>
               <div class="dropdown-inner">
                 <ul class="link-list">
-                  <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                  <li><a href="<?= site_url('logout')?>"><em class="icon ni ni-signout"></em><span>Logout</span></a></li>
                 </ul>
               </div>
             </div>
