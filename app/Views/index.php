@@ -1,3 +1,7 @@
+<?php
+  $session = session();
+
+?>
 <!DOCTYPE html>
 <html lang="en" class="js">
 <?php include('_head.php')?>
@@ -14,7 +18,9 @@
             </div>
             <div class="nk-block-between-md g-4">
               <div class="nk-block-head-content">
-                <h2 class="nk-block-title fw-normal">Tolulope Ciroma Ativie</h2>
+                <h2 class="nk-block-title fw-normal">
+	                <?= ucfirst($session->get('firstname')).' '.$session->get('othername').' '.ucfirst($session->get('lastname')) ?>
+                </h2>
                 <div class="nk-block-des">
                   <p>At a glance summary of your account.</p>
                 </div>
@@ -23,15 +29,6 @@
                 <ul class="nk-block-tools gx-3">
                   <li><a href="#" class="btn btn-primary"><span>New Withdrawal</span> <em class="icon ni ni-arrow-long-right"></em></a></li>
                   <li><a href="#" class="btn btn-white btn-light"><span>New Loan</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
-                  <li class="opt-menu-md dropdown">
-                    <a href="#" class="btn btn-white btn-light btn-icon" data-toggle="dropdown"><em class="icon ni ni-setting"></em></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <ul class="link-list-opt no-bdr">
-                        <li><a href="#"><em class="icon ni ni-coin-alt"></em><span>Curreny Settings</span></a></li>
-                        <li><a href="#"><em class="icon ni ni-notify"></em><span>Push Notification</span></a></li>
-                      </ul>
-                    </div>
-                  </li>
                 </ul>
               </div><!-- .nk-block-head-content -->
             </div><!-- .nk-block-between -->
@@ -80,7 +77,7 @@
                         <h5 class="nk-block-title title">Withdrawals Tracking</h5>
                       </div>
                       <div class="nk-block-head-content">
-                        <a href="html/crypto/wallets.html" class="link link-primary">View More</a>
+                        <a href="javascript:void(0)" class="link link-primary">View More</a>
                       </div>
                     </div>
                   </div><!-- .nk-block-head -->
@@ -88,7 +85,7 @@
                     <div class="col-sm-4">
                       <div class="card bg-light">
                         <div class="nk-wgw sm">
-                          <a class="nk-wgw-inner" href="html/crypto/wallet-bitcoin.html">
+                          <a class="nk-wgw-inner" href="#">
                             <div class="nk-wgw-name">
                               <div class="nk-wgw-icon">
                                 <em class="icon ni ni-more-h"></em>
@@ -96,7 +93,7 @@
                               <h5 class="nk-wgw-title title">Pending Withdrawals</h5>
                             </div>
                             <div class="nk-wgw-balance">
-                              <div class="amount">4<span class="currency currency-nio"> pending</span></div>
+                              <div class="amount"><?=$pending_withdrawals?><span class="currency currency-nio"> pending</span></div>
                             </div>
                           </a>
                         </div>
@@ -105,7 +102,7 @@
                     <div class="col-sm-4">
                       <div class="card bg-light">
                         <div class="nk-wgw sm">
-                          <a class="nk-wgw-inner" href="html/crypto/wallet-bitcoin.html">
+                          <a class="nk-wgw-inner" href="#">
                             <div class="nk-wgw-name">
                               <div class="nk-wgw-icon">
                                 <em class="icon ni ni-check-thick"></em>
@@ -113,7 +110,7 @@
                               <h5 class="nk-wgw-title title">Approved Withdrawals</h5>
                             </div>
                             <div class="nk-wgw-balance">
-                              <div class="amount">1<span class="currency currency-btc"> approved</span></div>
+                              <div class="amount"><?=$approved_withdrawals?><span class="currency currency-btc"> approved</span></div>
                             </div>
                           </a>
                         </div>
@@ -122,7 +119,7 @@
                     <div class="col-sm-4">
                       <div class="card bg-light">
                         <div class="nk-wgw sm">
-                          <a class="nk-wgw-inner" href="html/crypto/wallet-bitcoin.html">
+                          <a class="nk-wgw-inner" href="#">
                             <div class="nk-wgw-name">
                               <div class="nk-wgw-icon">
                                 <em class="icon ni ni-wallet-out"></em>
@@ -130,7 +127,7 @@
                               <h5 class="nk-wgw-title title">Disbursed Withdrawals</h5>
                             </div>
                             <div class="nk-wgw-balance">
-                              <div class="amount">0<span class="currency currency-eth"> disbursed</span></div>
+                              <div class="amount"><?=$disbursed_withdrawals?><span class="currency currency-eth"> disbursed</span></div>
                             </div>
                           </a>
                         </div>
@@ -145,7 +142,7 @@
                         <h6 class="nk-block-title title">Loan Tracking</h6>
                       </div>
                       <div class="nk-block-head-content">
-                        <a href="html/crypto/wallets.html" class="link link-primary">View More</a>
+                        <a href="#" class="link link-primary">View More</a>
                       </div>
                     </div>
                   </div><!-- .nk-block-head -->
@@ -153,7 +150,7 @@
                     <div class="col-sm-4">
                       <div class="card bg-light">
                         <div class="nk-wgw sm">
-                          <a class="nk-wgw-inner" href="html/crypto/wallet-bitcoin.html">
+                          <a class="nk-wgw-inner" href="#">
                             <div class="nk-wgw-name">
                               <div class="nk-wgw-icon">
                                 <em class="icon ni ni-more-h"></em>
@@ -161,7 +158,7 @@
                               <h5 class="nk-wgw-title title">Pending Loans</h5>
                             </div>
                             <div class="nk-wgw-balance">
-                              <div class="amount">1<span class="currency currency-nio"> pending</span></div>
+                              <div class="amount"><?=$pending_loans?><span class="currency currency-nio"> pending</span></div>
                             </div>
                           </a>
                         </div>
@@ -170,7 +167,7 @@
                     <div class="col-sm-4">
                       <div class="card bg-light">
                         <div class="nk-wgw sm">
-                          <a class="nk-wgw-inner" href="html/crypto/wallet-bitcoin.html">
+                          <a class="nk-wgw-inner" href="#">
                             <div class="nk-wgw-name">
                               <div class="nk-wgw-icon">
                                 <em class="icon ni ni-check-thick"></em>
@@ -178,7 +175,7 @@
                               <h5 class="nk-wgw-title title">Approved Loans</h5>
                             </div>
                             <div class="nk-wgw-balance">
-                              <div class="amount">2<span class="currency currency-btc"> approved</span></div>
+                              <div class="amount"><?=$approved_loans?><span class="currency currency-btc"> approved</span></div>
                             </div>
                           </a>
                         </div>
@@ -187,7 +184,7 @@
                     <div class="col-sm-4">
                       <div class="card bg-light">
                         <div class="nk-wgw sm">
-                          <a class="nk-wgw-inner" href="html/crypto/wallet-bitcoin.html">
+                          <a class="nk-wgw-inner" href="#">
                             <div class="nk-wgw-name">
                               <div class="nk-wgw-icon">
                                 <em class="icon ni ni-wallet-out"></em>
@@ -195,7 +192,7 @@
                               <h5 class="nk-wgw-title title">Disbursed Loans</h5>
                             </div>
                             <div class="nk-wgw-balance">
-                              <div class="amount">0<span class="currency currency-eth"> disbursed</span></div>
+                              <div class="amount"><?=$disbursed_loans?><span class="currency currency-eth"> disbursed</span></div>
                             </div>
                           </a>
                         </div>
