@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 class Auth extends BaseController {
+
   function login() {
     if ($this->session->active) {
       return redirect('/');
@@ -17,7 +18,6 @@ class Auth extends BaseController {
       $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $staff_id)->first();
       if ($cooperator) {
       	if (password_verify($password, $cooperator['cooperator_password'])) {
-      		print_r($cooperator);
       		$user_data = array(
       			'firstname' => $cooperator['cooperator_first_name'],
 			      'lastname' => $cooperator['cooperator_last_name'],
@@ -37,7 +37,8 @@ class Auth extends BaseController {
 			      'sort_code' => $cooperator['cooperator_sort_code'],
 			      'date' => $cooperator['cooperator_date'],
 			      'savings' => $cooperator['cooperator_savings'],
-			      'status' => $cooperator['cooperator_status']
+			      'status' => $cooperator['cooperator_status'],
+			      'active' => true
 		      );
       		$this->session->set($user_data);
 		      $this->session->setFlashdata('login_success', 'You have logged in successfully!');
@@ -47,5 +48,13 @@ class Auth extends BaseController {
       	print_r('Not Found');
       }
     }
+  }
+
+  function logout() {
+  	if ($this->session->active) {
+  		$this->session->stop();
+  		$this->session->destroy();
+	  }
+  	return redirect('auth/login');
   }
 }

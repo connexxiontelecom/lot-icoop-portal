@@ -36,6 +36,7 @@ $routes->get('/', 'Home::index');
 
 $routes->get('auth/login', 'Auth::login');
 $routes->post('login', 'Auth::auth_login');
+$routes->get('logout', 'Auth::logout');
 
 
 /*
