@@ -40,7 +40,7 @@
                           <div class="nk-order-ovwg">
                             <div class="row g-4 align-end">
                               <div class="col-xxl-8">
-                                <form action="" method="post" class="form-validate">
+                                <form action="<?= site_url('account-statement/view-account-statement')?>" method="post" class="form-validate">
                                   <div class="form-group mt-2">
                                     <div class="form-control-wrap">
                                       <select class="form-select form-control form-control-xl" data-ui="xl" id="savings-type" name="savings_type" required>
@@ -59,7 +59,7 @@
                                       <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-calendar-alt"></em>
                                       </div>
-                                      <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="start-date" name="start_date" required>
+                                      <input autocomplete="off" type="text" class="form-control form-control-xl form-control-outlined date-picker" id="start-date" name="start_date" required>
                                       <label class="form-label-outlined" for="start-date">Start Date</label>
                                     </div>
                                   </div>
@@ -68,7 +68,7 @@
                                       <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-calendar-alt"></em>
                                       </div>
-                                      <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="end-date" name="end_date" required>
+                                      <input autocomplete="off" type="text" class="form-control form-control-xl form-control-outlined date-picker" id="end-date" name="end_date" required>
                                       <label class="form-label-outlined" for="end-date">End Date</label>
                                     </div>
                                   </div>

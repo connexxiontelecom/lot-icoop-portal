@@ -30,7 +30,7 @@
               <label class="form-label" for="default-01">Staff ID</label>
               <a class="link link-primary link-sm" tabindex="-1" href="#">Need Help?</a>
             </div>
-            <input type="text" class="form-control form-control-lg" id="default-01" name="staff_id" placeholder="Enter your staff id" required>
+            <input autocomplete="off" type="text" class="form-control form-control-lg" id="default-01" name="staff_id" placeholder="Enter your staff id" required>
           </div><!-- .form-group -->
           <div class="form-group">
             <div class="form-label-group">
@@ -42,7 +42,7 @@
                 <em class="passcode-icon icon-show icon ni ni-eye"></em>
                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
               </a>
-              <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your passcode" required>
+              <input autocomplete="off" type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your passcode" required>
             </div>
           </div><!-- .foem-group -->
           <div class="form-group">
