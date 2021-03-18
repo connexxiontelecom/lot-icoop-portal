@@ -2,6 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\BankModel;
+use App\Models\ContributionTypeModel;
+use App\Models\CooperatorModel;
+use App\Models\DepartmentModel;
+use App\Models\LoanApplicationModel;
+use App\Models\LoanModel;
+use App\Models\LocationModel;
+use App\Models\PaymentDetailModel;
+use App\Models\PayrollGroupModel;
+use App\Models\StateModel;
+use App\Models\WithdrawModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -30,6 +41,18 @@ class BaseController extends Controller
 	protected $helpers = ['form', 'url'];
 	protected $session;
 
+	protected $bankModel;
+	protected $contributionTypeModel;
+	protected $cooperatorModel;
+	protected $departmentModel;
+	protected $loanApplicationModel;
+	protected $loanModel;
+	protected $locationModel;
+	protected $paymentDetailModel;
+	protected $payrollGroupModel;
+	protected $stateModel;
+	protected $withdrawModel;
+
 	/**
 	 * Constructor.
 	 *
@@ -45,6 +68,19 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-    $this->session = session();
+    // libraries
+    $this->session = \CodeIgniter\Config\Services::session();
+    // models
+		$this->bankModel = new BankModel();
+		$this->contributionTypeModel = new ContributionTypeModel();
+    $this->cooperatorModel = new CooperatorModel();
+    $this->departmentModel = new DepartmentModel();
+    $this->loanApplicationModel = new LoanApplicationModel();
+    $this->loanModel = new LoanModel();
+    $this->locationModel = new LocationModel();
+    $this->paymentDetailModel = new PaymentDetailModel();
+    $this->payrollGroupModel = new PayrollGroupModel();
+    $this->stateModel = new StateModel();
+    $this->withdrawModel = new WithdrawModel();
 	}
 }

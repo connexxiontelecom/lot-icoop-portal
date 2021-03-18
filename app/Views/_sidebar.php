@@ -1,3 +1,7 @@
+<?php
+  $session = session();
+  $uri = service('uri');
+?>
 <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
   <div class="nk-sidebar-element nk-sidebar-head">
     <div class="nk-sidebar-brand">
@@ -17,34 +21,32 @@
         <div class="nk-sidebar-widget d-none d-xl-block">
           <div class="user-account-info between-center">
             <div class="user-account-main">
-              <h6 class="overline-title-alt">Available Balance</h6>
-              <div class="user-balance">2.014095 <small class="currency currency-btc">NGN</small></div>
-              <div class="user-balance-alt">18,934.84 <span class="currency currency-btc">NGN</span></div>
+              <h6 class="overline-title-alt">Savings Balance</h6>
+              <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
             </div>
             <a href="#" class="btn btn-white btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
           </div>
           <ul class="user-account-data gy-1">
             <li>
               <div class="user-account-label">
-                <span class="sub-text">Profits (7d)</span>
+                <span class="sub-text">Monthly Contribution</span>
               </div>
               <div class="user-account-value">
-                <span class="lead-text">+ 0.0526 <span class="currency currency-btc">BTC</span></span>
-                <span class="text-success ml-2">3.1% <em class="icon ni ni-arrow-long-up"></em></span>
+                <span class="lead-text"><em class="icon ni ni-sign-kobo"></em> <?= number_format($session->get('savings'),2, '.', ',') ?></span>
               </div>
             </li>
-            <li>
-              <div class="user-account-label">
-                <span class="sub-text">Deposit in orders</span>
-              </div>
-              <div class="user-account-value">
-                <span class="sub-text">0.005400 <span class="currency currency-btc">BTC</span></span>
-              </div>
-            </li>
+<!--            <li>-->
+<!--              <div class="user-account-label">-->
+<!--                <span class="sub-text">Deposit in orders</span>-->
+<!--              </div>-->
+<!--              <div class="user-account-value">-->
+<!--                <span class="sub-text">0.005400 <span class="currency currency-btc">BTC</span></span>-->
+<!--              </div>-->
+<!--            </li>-->
           </ul>
           <div class="user-account-actions">
             <ul class="g-3">
-              <li><a href="#" class="btn btn-lg btn-primary"><span>Deposit</span></a></li>
+              <li><a href="#" class="btn btn-lg btn-primary"><span>Loan</span></a></li>
               <li><a href="#" class="btn btn-lg btn-warning"><span>Withdraw</span></a></li>
             </ul>
           </div>
@@ -54,11 +56,13 @@
             <div class="user-card-wrap">
               <div class="user-card">
                 <div class="user-avatar">
-                  <span>AB</span>
+                  <span>
+                    <?= ucfirst($session->get('firstname'))[0].''.ucfirst($session->get('lastname'))[0] ?>
+                  </span>
                 </div>
                 <div class="user-info">
-                  <span class="lead-text">Abu Bin Ishtiyak</span>
-                  <span class="sub-text">info@softnio.com</span>
+                  <span class="lead-text"><?= $session->get('firstname').' '.$session->get('lastname') ?></span>
+                  <span class="sub-text"><?= $session->get('email') ?></span>
                 </div>
                 <div class="user-action">
                   <em class="icon ni ni-chevron-down"></em>
@@ -69,42 +73,40 @@
           <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
             <div class="user-account-info between-center">
               <div class="user-account-main">
-                <h6 class="overline-title-alt">Available Balance</h6>
-                <div class="user-balance">2.014095 <small class="currency currency-btc">BTC</small></div>
-                <div class="user-balance-alt">18,934.84 <span class="currency currency-btc">BTC</span></div>
+                <h6 class="overline-title-alt">Savings Balance</h6>
+                <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
               </div>
               <a href="#" class="btn btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
             </div>
             <ul class="user-account-data">
               <li>
                 <div class="user-account-label">
-                  <span class="sub-text">Profits (7d)</span>
+                  <span class="sub-text">Monthly Contribution</span>
                 </div>
                 <div class="user-account-value">
-                  <span class="lead-text">+ 0.0526 <span class="currency currency-btc">BTC</span></span>
-                  <span class="text-success ml-2">3.1% <em class="icon ni ni-arrow-long-up"></em></span>
+                  <span class="lead-text"><em class="icon ni ni-sign-kobo"></em> <?= number_format($session->get('savings'),2, '.', ',') ?></span>
                 </div>
               </li>
-              <li>
-                <div class="user-account-label">
-                  <span class="sub-text">Deposit in orders</span>
-                </div>
-                <div class="user-account-value">
-                  <span class="sub-text text-base">0.005400 <span class="currency currency-btc">BTC</span></span>
-                </div>
-              </li>
+<!--              <li>-->
+<!--                <div class="user-account-label">-->
+<!--                  <span class="sub-text">Deposit in orders</span>-->
+<!--                </div>-->
+<!--                <div class="user-account-value">-->
+<!--                  <span class="sub-text text-base">0.005400 <span class="currency currency-btc">BTC</span></span>-->
+<!--                </div>-->
+<!--              </li>-->
             </ul>
             <ul class="user-account-links">
               <li><a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a></li>
-              <li><a href="#" class="link"><span>Deposit Funds</span> <em class="icon ni ni-wallet-in"></em></a></li>
+              <li><a href="#" class="link"><span>Loan Funds</span> <em class="icon ni ni-wallet-in"></em></a></li>
             </ul>
             <ul class="link-list">
-              <li><a href="html/crypto/profile.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-              <li><a href="html/crypto/profile-security.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-              <li><a href="html/crypto/profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+              <li><a href="#"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+              <li><a href="#"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+              <li><a href="#"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
             </ul>
             <ul class="link-list">
-              <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+              <li><a href="<?= site_url('logout')?>"><em class="icon ni ni-signout"></em><span>Logout</span></a></li>
             </ul>
           </div>
         </div><!-- .nk-sidebar-widget -->
@@ -115,13 +117,13 @@
               <h6 class="overline-title">Menu</h6>
             </li>
             <li class="nk-menu-item">
-              <a href="/members-portal/dashboard" class="nk-menu-link">
+              <a href="/dashboard" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-dashboard"></em></span>
                 <span class="nk-menu-text">Dashboard</span>
               </a>
             </li>
             <li class="nk-menu-item">
-              <a href="#" class="nk-menu-link">
+              <a href="/account-statement" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
                 <span class="nk-menu-text">Account Statement</span>
               </a>
