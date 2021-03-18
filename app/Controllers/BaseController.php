@@ -9,6 +9,7 @@ use App\Models\DepartmentModel;
 use App\Models\LoanApplicationModel;
 use App\Models\LoanModel;
 use App\Models\LocationModel;
+use App\Models\PaymentDetailModel;
 use App\Models\PayrollGroupModel;
 use App\Models\StateModel;
 use App\Models\WithdrawModel;
@@ -47,6 +48,7 @@ class BaseController extends Controller
 	protected $loanApplicationModel;
 	protected $loanModel;
 	protected $locationModel;
+	protected $paymentDetailModel;
 	protected $payrollGroupModel;
 	protected $stateModel;
 	protected $withdrawModel;
@@ -76,6 +78,7 @@ class BaseController extends Controller
     $this->loanApplicationModel = new LoanApplicationModel();
     $this->loanModel = new LoanModel();
     $this->locationModel = new LocationModel();
+    $this->paymentDetailModel = new PaymentDetailModel();
     $this->payrollGroupModel = new PayrollGroupModel();
     $this->stateModel = new StateModel();
     $this->withdrawModel = new WithdrawModel();

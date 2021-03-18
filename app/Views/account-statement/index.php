@@ -33,18 +33,23 @@
                             <div class="card-title">
                               <h6 class="title">Savings Types</h6>
                               <p class="mt-2">
-                                Select a Savings Type and a date range to view a comprehensive account activity for this account during this date range.
+                                Select a Savings Type and a date range to view comprehensive account activity for the account during this date range.
                               </p>
                             </div>
                           </div><!-- .card-title-group -->
                           <div class="nk-order-ovwg">
                             <div class="row g-4 align-end">
                               <div class="col-xxl-8">
-                                <form action="#">
+                                <form action="" method="post" class="form-validate">
                                   <div class="form-group mt-2">
                                     <div class="form-control-wrap">
-                                      <select class="form-select form-control form-control-xl" data-ui="xl" id="savings-type" name="savings_type">
-                                        <option value="default_option">Default Option</option>
+                                      <select class="form-select form-control form-control-xl" data-ui="xl" id="savings-type" name="savings_type" required>
+                                        <option value="default" class="bold">Default Option</option>
+                                        <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type): ?>
+                                          <option value="<?=$savings_type['contribution_type_id']?>">
+                                            <?=$savings_type['contribution_type_name']?>
+                                          </option>
+                                        <?php endforeach; endif; ?>
                                       </select>
                                       <label class="form-label-outlined" for="savings-type">Select Savings Type</label>
                                     </div>
@@ -54,18 +59,21 @@
                                       <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-calendar-alt"></em>
                                       </div>
-                                      <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="start-date" name="start_date">
+                                      <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="start-date" name="start_date" required>
                                       <label class="form-label-outlined" for="start-date">Start Date</label>
                                     </div>
                                   </div>
-                                  <div class="form-group mb-3">
+                                  <div class="form-group">
                                     <div class="form-control-wrap">
                                       <div class="form-icon form-icon-right">
                                         <em class="icon ni ni-calendar-alt"></em>
                                       </div>
-                                      <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="end-date" name="end_date">
+                                      <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="end-date" name="end_date" required>
                                       <label class="form-label-outlined" for="end-date">End Date</label>
                                     </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Generate Statement</button>
                                   </div>
                                 </form>
                               </div><!-- .col -->
@@ -74,7 +82,6 @@
                         </div><!-- .card-inner -->
                       </div><!-- .card -->
                     </div><!-- .col -->
-
                   </div><!-- .row -->
                 </div><!-- .nk-block -->
               </div>
@@ -84,24 +91,9 @@
         </div>
       </div>
     </div>
-    <div class="modal fade zoom" tabindex="-1" id="savings-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Savings Types</h5>
-            <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-              <em class="icon ni ni-cross"></em>
-            </a>
-          </div>
-          <div class="modal-body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem similique earum necessitatibus nesciunt! Quia id expedita asperiores voluptatem odit quis fugit sapiente assumenda sunt voluptatibus atque facere autem, omnis explicabo.</p>
-          </div>
-          <div class="modal-footer bg-light">
-            <span class="sub-text">Modal Footer Text</span>
-          </div>
-        </div>
-      </div>
-    </div>
     <?php include(APPPATH.'/Views/_scripts.php'); ?>
+    <script>
+
+    </script>
   </body>
 </html>
