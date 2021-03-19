@@ -443,7 +443,6 @@
     });
   }; // DataTable @1.1
 
-
   NioApp.DataTable = function (elm, opt) {
     if ($(elm).exists()) {
       $(elm).each(function () {
@@ -480,7 +479,6 @@
     }
   }; // BootStrap Extended
 
-
   NioApp.BS.ddfix = function (elm, exc) {
     var dd = elm ? elm : '.dropdown-menu',
         ex = exc ? exc : 'a:not(.clickable), button:not(.clickable), a:not(.clickable) *, button:not(.clickable) *';
@@ -512,8 +510,6 @@
       });
     }
   }; // BootStrap Specific Tab Open
-
-
   NioApp.BS.tabfix = function (elm) {
     var tab = elm ? elm : '[data-toggle="modal"]';
     $(tab).on('click', function () {
@@ -533,8 +529,6 @@
       }
     });
   }; // Dark Mode Switch @since v2.0
-
-
   NioApp.ModeSwitch = function () {
     var toggle = $('.dark-switch');
 
@@ -550,8 +544,6 @@
       $body.toggleClass('dark-mode');
     });
   }; // Knob @v1.0
-
-
   NioApp.Knob.init = function () {
     var knob = {
       "default": {
@@ -568,29 +560,21 @@
     NioApp.Knob('.knob', knob["default"]);
     NioApp.Knob('.knob-half', knob.half);
   }; // Range @v1.0
-
-
   NioApp.Range.init = function () {
     NioApp.Range('.form-range-slider');
   };
-
   NioApp.Select2.init = function () {
     // NioApp.Select2('.select');
     NioApp.Select2('.form-select');
   }; // Slick Init @v1.0
-
-
   NioApp.Slider.init = function () {
     NioApp.Slick('.slider-init');
   }; // Dropzone Init @v1.0
-
-
   NioApp.Dropzone.init = function () {
     NioApp.Dropzone('.upload-zone', {
       url: "/images"
     });
   }; // DataTable Init @v1.0
-
 
   NioApp.DataTable.init = function () {
     NioApp.DataTable('.datatable-init', {
@@ -600,7 +584,6 @@
     });
     $.fn.DataTable.ext.pager.numbers_length = 7;
   }; // Extra @v1.1
-
 
   NioApp.OtherInit = function () {
     NioApp.ClassBody();

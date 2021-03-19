@@ -14,12 +14,11 @@
             <div class="container-xl wide-lg">
               <div class="nk-content-body">
                 <div class="nk-content-head">
-<!--                  <div class="nk-block-head-sub"><span>Account Statement</span></div>-->
                   <div class="nk-block-between-md g-4">
                     <div class="nk-block-head-content">
                       <h2 class="nk-block-title fw-normal">Account Statement</h2>
                       <div class="nk-block-des">
-                        <p>View activity on any savings type here.</p>
+                        <p>View activity on your savings type here.</p>
                       </div>
                     </div>
                   </div>
@@ -74,7 +73,7 @@
                                   </div>
                                   <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Generate Statement</button>
-                                    <button id="toast-btn" type="button" hidden class="no-payment-details">Generate Statement</button>
+                                    <button id="toast-btn" type="button" hidden class="no-payment-details"></button>
                                   </div>
                                 </form>
                               </div><!-- .col -->

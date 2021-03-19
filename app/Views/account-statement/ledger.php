@@ -1,5 +1,16 @@
 <?php
-$session = session();
+  $session = session();
+  $balance = 0; $total_dr = 0; $total_cr = 0;
+  foreach ($payment_details as $payment_detail) {
+	  if ($payment_detail->pd_drcrtype == 2){
+		  $balance -= $payment_detail->pd_amount;
+		  $total_dr += $payment_detail->pd_amount;
+	  }
+	  if ($payment_detail->pd_drcrtype == 1){
+		  $balance += $payment_detail->pd_amount;
+		  $total_cr += $payment_detail->pd_amount;
+	  }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
@@ -18,9 +29,7 @@ $session = session();
                 <div class="nk-block-head-content">
                   <div class="nk-block-head-sub"><a class="back-to" href="<?=site_url('account-statement')?>"><em class="icon ni ni-arrow-left"></em><span>Account Statement</span></a></div>
                   <h2 class="nk-block-title fw-normal">View Account Statement</h2>
-                  <div class="nk-block-des">
-<!--                    <p class="lead">This is a periodic summary of account activity with a beginning and an ending date add advanced interaction controls to your HTML tables. It is a highly flexible tool and all advanced features allow you to display table instantly and nice way.</p>-->
-                  </div>
+                  <div class="nk-block-des"></div>
                 </div>
               </div><!-- .nk-block-head -->
               <div class="nk-block nk-block-lg">
@@ -49,6 +58,65 @@ $session = session();
                       </p>
                     </div>
                   </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <div class="card card-bordered card-full">
+                      <div class="card-inner">
+                        <div class="card-title-group align-start mb-0">
+                          <div class="card-title">
+                            <h6 class="subtitle">Total Debit</h6>
+                          </div>
+                          <div class="card-tools">
+                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Total Debited"></em>
+                          </div>
+                        </div>
+                        <div class="card-amount">
+                          <span class="amount">
+                            <?= number_format($total_dr, 2, '.', ',');?>
+                          </span>
+                        </div>
+                      </div>
+                    </div><!-- .card -->
+                  </div><!-- .col -->
+                  <div class="col-md-4">
+                    <div class="card card-bordered card-full">
+                      <div class="card-inner">
+                        <div class="card-title-group align-start mb-0">
+                          <div class="card-title">
+                            <h6 class="subtitle">Total Credit</h6>
+                          </div>
+                          <div class="card-tools">
+                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Total Credited"></em>
+                          </div>
+                        </div>
+                        <div class="card-amount">
+                          <span class="amount">
+                            <?= number_format($total_cr, 2, '.', ',');?>
+                          </span>
+                        </div>
+                      </div>
+                    </div><!-- .card -->
+                  </div><!-- .col -->
+                  <div class="col-md-4">
+                    <div class="card card-bordered card-full">
+                      <div class="card-inner">
+                        <div class="card-title-group align-start mb-0">
+                          <div class="card-title">
+                            <h6 class="subtitle">Ledger Balance</h6>
+                          </div>
+                          <div class="card-tools">
+                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Ledger Balance"></em>
+                          </div>
+                        </div>
+                        <div class="card-amount">
+                          <span class="amount">
+                            <?= number_format($balance, 2, '.', ',');?>
+                          </span>
+                        </div>
+                      </div>
+                    </div><!-- .card -->
+                  </div><!-- .col -->
                 </div>
                 <div class="card card-preview">
                   <div class="card-inner">
