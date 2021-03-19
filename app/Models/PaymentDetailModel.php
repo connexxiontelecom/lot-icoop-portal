@@ -25,4 +25,12 @@ class PaymentDetailModel extends Model {
 		return $this->query_builder->get()->getResult();
 	}
 
+	public function get_payment_details_by_date_range($staff_id, $savings_type, $start_date, $end_date): array {
+		$this->query_builder->where('pd_staff_id', $staff_id);
+		$this->query_builder->where('pd_ct_id', $savings_type);
+		$this->query_builder->where('pd_transaction_date >=', $start_date);
+		$this->query_builder->where('pd_transaction_date <=', $end_date);
+		return $this->query_builder->get()->getResult();
+	}
+
 }
