@@ -74,6 +74,7 @@
                                   </div>
                                   <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Generate Statement</button>
+                                    <button id="toast-btn" type="button" hidden class="no-payment-details">Generate Statement</button>
                                   </div>
                                 </form>
                               </div><!-- .col -->
@@ -92,8 +93,12 @@
       </div>
     </div>
     <?php include(APPPATH.'/Views/_scripts.php'); ?>
-    <script>
-
-    </script>
+    <?php if($session->getFlashdata('no_payment_details')):?>
+      <script>
+        $(document).ready(function () {
+          $('.no-payment-details').click();
+        })
+      </script>
+    <?php endif;?>
   </body>
 </html>

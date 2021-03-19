@@ -32,9 +32,16 @@ class AccountStatement extends BaseController {
 						$page_data['start_date'] = $start_date;
 						$page_data['end_date'] = $end_date;
 						return view('account-statement/ledger', $page_data);
+					} else {
+						$this->session->setFlashdata('no_payment_details', 'We could not find an activity for your criteria!');
 					}
+				} else {
+					$this->session->setFlashdata('no_payment_details', 'Please select a valid Savings Type!');
 				}
+			} else {
+				$this->session->setFlashdata('no_payment_details', 'Please select a valid Savings Type or Transaction Date Range!');
 			}
+			return redirect('account-statement');
 		}
 		return redirect('auth/login');
 	}

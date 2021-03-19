@@ -111,4 +111,12 @@
     toastr.clear();
     NioApp.Toast('<h5>Update Successfully</h5><p>Your profile has been successfully updated.</p>', 'success');
   });
+  // custom alerts
+  $('.no-payment-details').on("click", function (e) {
+    e.preventDefault();
+    toastr.clear();
+    NioApp.Toast('<h5>Generate Statement Attempt</h5><p>Sorry, we could not find any ledger information.</p>', 'error', {
+      position: 'top-right'
+    });
+  })
 })(NioApp, jQuery);

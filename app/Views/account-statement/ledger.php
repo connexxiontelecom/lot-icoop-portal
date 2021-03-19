@@ -19,7 +19,7 @@ $session = session();
                   <div class="nk-block-head-sub"><a class="back-to" href="<?=site_url('account-statement')?>"><em class="icon ni ni-arrow-left"></em><span>Account Statement</span></a></div>
                   <h2 class="nk-block-title fw-normal">View Account Statement</h2>
                   <div class="nk-block-des">
-                    <p class="lead">Using <a href="https://datatables.net/" target="_blank">DataTables</a>, add advanced interaction controls to your HTML tables. It is a highly flexible tool and all advanced features allow you to display table instantly and nice way.</p>
+<!--                    <p class="lead">This is a periodic summary of account activity with a beginning and an ending date add advanced interaction controls to your HTML tables. It is a highly flexible tool and all advanced features allow you to display table instantly and nice way.</p>-->
                   </div>
                 </div>
               </div><!-- .nk-block-head -->
@@ -28,7 +28,25 @@ $session = session();
                   <div class="nk-block-head-content">
                     <h4 class="nk-block-title"><?= $savings_type['contribution_type_name']?> Ledger</h4>
                     <div class="nk-block-des">
-                      <p>Using the most basic table markup, here’s how <code class="code-class">.table</code> based tables look by default.</p>
+                      <p>
+                        This is the periodic summary of your account activity starting from
+                        <span class="font-weight-bolder">
+                          <?php
+                            $start_date = DateTime::createFromFormat('Y-m-d', $start_date);
+                            $start_date = $start_date->format('d M Y');
+                            echo $start_date;
+                          ?>
+                        </span>
+                        and ending at
+                        <span class="font-weight-bolder">
+                          <?php
+                            $end_date = DateTime::createFromFormat('Y-m-d', $end_date);
+                            $end_date = $end_date->format('d M Y');
+                            echo $end_date;
+                          ?>
+                        </span>
+	                      .
+                      </p>
                     </div>
                   </div>
                 </div>
