@@ -35,6 +35,9 @@ $routes->setAutoRoute(true);
 $routes->get('dashboard', 'Home::index');
 
 $routes->get('account-statement', 'AccountStatement::index');
+$routes->post('account-statement/view-account-statement', 'AccountStatement::view_account_statement');
+
+$routes->get('outstanding-loans', 'OutstandingLoans::index');
 
 $routes->get('auth/login', 'Auth::login');
 $routes->post('login', 'Auth::auth_login');

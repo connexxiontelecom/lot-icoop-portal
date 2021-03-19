@@ -129,7 +129,7 @@
               </a>
             </li>
             <li class="nk-menu-item">
-              <a href="#" class="nk-menu-link">
+              <a href="/outstanding-loans" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-wallet-alt"></em></span>
                 <span class="nk-menu-text">Outstanding Loans</span>
               </a>
