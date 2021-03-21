@@ -23,6 +23,11 @@ $session = session();
                 </div>
               </div><!-- .nk-block-head -->
               <div class="nk-block nk-block-lg">
+                <div class="nk-block-head">
+                  <div class="nk-blood-head-content">
+                    <h4 class="nk-block-title">Your Outstanding Loans</h4>
+                  </div>
+                </div>
                 <div class="card card-preview">
                   <div class="card-inner">
                     <table class="datatable-init table">
@@ -34,10 +39,37 @@ $session = session();
                         <th class="text-right">Paid</th>
                         <th class="text-right">Outstanding</th>
                         <th class="text-right">Encumbered</th>
-                        <th>View</th>
+                        <th class="text-right">View</th>
                       </tr>
                       </thead>
                       <tbody>
+                        <?php if (!empty($outstanding_loans)): foreach ($outstanding_loans as $outstanding_loan): ?>
+                          <tr>
+                            <td>
+                              <?=$outstanding_loan['loan_type']?>
+                            </td>
+                            <td class="text-right">
+                              <?=number_format($outstanding_loan['loan_principal'], 2)?>
+                            </td>
+                            <td class="text-right">
+	                            <?=number_format($outstanding_loan['total_interest'], 2)?>
+                            </td>
+                            <td class="text-right">
+	                            <?=number_format($outstanding_loan['total_cr'], 2)?>
+                            </td>
+                            <td class="text-right">
+	                            <?=number_format($outstanding_loan['loan_balance'], 2)?>
+                            </td>
+                            <td class="text-right">
+	                            <?=number_format(0, 2)?>
+                            </td>
+                            <td class="text-right">
+                              <a href="<?=site_url('outstanding-loans/view-outstanding-loan/'.$outstanding_loan['loan_id'])?>" class="btn btn-icon btn-trigger">
+                                <em class="icon ni ni-more-h"></em>
+                              </a>
+                            </td>
+                          </tr>
+                        <?php endforeach; endif;?>
                       </tbody>
                     </table>
                   </div>

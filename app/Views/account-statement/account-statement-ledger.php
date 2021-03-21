@@ -168,16 +168,21 @@
                         <?php endforeach; endif;?>
                         <tr class="border-primary">
                           <td class="font-weight-bolder">
+	                          <?php
+                              $date = date_create($end_date);
+                              echo date_format($date, 'd M Y')
+	                          ?>
+                          </td>
+                          <td class="font-weight-bolder">
                             Total
                           </td>
-                          <td></td>
-                          <td class="text-right text-danger">
+                          <td class="text-right text-danger font-weight-bolder">
                             <?= number_format($total_dr, 2, '.', ',');?>
                           </td>
-                          <td class="text-right text-success">
+                          <td class="text-right text-success font-weight-bolder">
                             <?= number_format($total_cr, 2, '.', ',');?>
                           </td>
-                          <td class="text-right">
+                          <td class="text-right font-weight-bolder">
                             <?= number_format($balance, 2, '.', ',');?>
                           </td>
                         </tr>
