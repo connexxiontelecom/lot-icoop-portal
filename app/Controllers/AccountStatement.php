@@ -31,7 +31,7 @@ class AccountStatement extends BaseController {
 						$page_data['savings_type'] = $this->contributionTypeModel->where('contribution_type_id', $savings_type)->first();
 						$page_data['start_date'] = $start_date;
 						$page_data['end_date'] = $end_date;
-						return view('account-statement/ledger', $page_data);
+						return view('account-statement/account-statement-ledger', $page_data);
 					} else {
 						$this->session->setFlashdata('no_payment_details', 'We could not find an activity for your criteria!');
 					}

@@ -19,11 +19,18 @@ class LoanModel extends Model {
 		$this->query_builder = $this->db_instance->table('loans');
 	}
 
-	public function get_outstanding_loans_by_staff_id_loan_id($staff_id, $loan_id): array {
+	public function get_cooperator_loans_by_staff_id_loan_id($staff_id, $loan_id): array {
 		$this->query_builder->join('loan_setups', 'loan_setups.loan_setup_id = loans.loan_type');
 		$this->query_builder->join('loan_applications', 'loan_applications.loan_app_id = loans.loan_app_id');
 		$this->query_builder->join('loan_repayments', 'loan_repayments.lr_loan_id = loans.loan_id');
 		$this->query_builder->where('loan_repayments.lr_loan_id', $loan_id);
+		$this->query_builder->where('loans.staff_id', $staff_id);
+		return $this->query_builder->get()->getResult();
+	}
+
+	public function get_cooperator_loans_no_repayment_by_staff_id_loan_id($staff_id, $loan_id): array {
+		$this->query_builder->join('loan_setups', 'loan_setups.loan_setup_id = loans.loan_type');
+		$this->query_builder->join('loan_applications', 'loan_applications.loan_app_id = loans.loan_app_id');
 		$this->query_builder->where('loans.staff_id', $staff_id);
 		return $this->query_builder->get()->getResult();
 	}

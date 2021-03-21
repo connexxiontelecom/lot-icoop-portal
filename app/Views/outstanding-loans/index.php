@@ -23,6 +23,11 @@ $session = session();
                 </div>
               </div><!-- .nk-block-head -->
               <div class="nk-block nk-block-lg">
+                <div class="nk-block-head">
+                  <div class="nk-blood-head-content">
+                    <h4 class="nk-block-title">Your Outstanding Loans</h4>
+                  </div>
+                </div>
                 <div class="card card-preview">
                   <div class="card-inner">
                     <table class="datatable-init table">
@@ -59,8 +64,8 @@ $session = session();
 	                            <?=number_format(0, 2)?>
                             </td>
                             <td class="text-right">
-                              <a href="#" class="btn btn-icon btn-trigger">
-                                <em class="icon ni ni-eye"></em>
+                              <a href="<?=site_url('outstanding-loans/view-outstanding-loan/'.$outstanding_loan['loan_id'])?>" class="btn btn-icon btn-trigger">
+                                <em class="icon ni ni-more-h"></em>
                               </a>
                             </td>
                           </tr>
