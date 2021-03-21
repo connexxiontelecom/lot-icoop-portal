@@ -38,6 +38,7 @@ $routes->get('account-statement', 'AccountStatement::index');
 $routes->post('account-statement/view-account-statement', 'AccountStatement::view_account_statement');
 
 $routes->get('outstanding-loans', 'OutstandingLoans::index');
+$routes->get('outstanding-loans/view-outstanding-loan/(:num)', 'OutstandingLoans::view_outstanding_loan/$1');
 
 $routes->get('auth/login', 'Auth::login');
 $routes->post('login', 'Auth::auth_login');
