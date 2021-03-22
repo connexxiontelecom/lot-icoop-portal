@@ -40,6 +40,8 @@ $routes->post('account-statement/view-account-statement', 'AccountStatement::vie
 $routes->get('outstanding-loans', 'OutstandingLoans::index');
 $routes->get('outstanding-loans/view-outstanding-loan/(:num)', 'OutstandingLoans::view_outstanding_loan/$1');
 
+$routes->get('finished-loans', 'FinishedLoans::index');
+
 $routes->get('auth/login', 'Auth::login');
 $routes->post('login', 'Auth::auth_login');
 $routes->get('logout', 'Auth::logout');
