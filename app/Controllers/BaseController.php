@@ -8,6 +8,7 @@ use App\Models\CooperatorModel;
 use App\Models\DepartmentModel;
 use App\Models\LoanApplicationModel;
 use App\Models\LoanModel;
+use App\Models\LoanSetupModel;
 use App\Models\LocationModel;
 use App\Models\PaymentDetailModel;
 use App\Models\PayrollGroupModel;
@@ -47,6 +48,7 @@ class BaseController extends Controller
 	protected $departmentModel;
 	protected $loanApplicationModel;
 	protected $loanModel;
+	protected $loanSetupModel;
 	protected $locationModel;
 	protected $paymentDetailModel;
 	protected $payrollGroupModel;
@@ -77,6 +79,7 @@ class BaseController extends Controller
     $this->departmentModel = new DepartmentModel();
     $this->loanApplicationModel = new LoanApplicationModel();
     $this->loanModel = new LoanModel();
+    $this->loanSetupModel = new LoanSetupModel();
     $this->locationModel = new LocationModel();
     $this->paymentDetailModel = new PaymentDetailModel();
     $this->payrollGroupModel = new PayrollGroupModel();

@@ -3,6 +3,8 @@
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
+use App\Controllers\LoanApplication;
+
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
@@ -41,6 +43,9 @@ $routes->get('outstanding-loans', 'OutstandingLoans::index');
 $routes->get('outstanding-loans/view-outstanding-loan/(:num)', 'OutstandingLoans::view_outstanding_loan/$1');
 
 $routes->get('finished-loans', 'FinishedLoans::index');
+
+$routes->get('loan-application', 'LoanApplication::index');
+$routes->get('loan-application/get-loan-setup-details/(:any)', 'LoanApplication::get_loan_setup_details/$1');
 
 $routes->get('auth/login', 'Auth::login');
 $routes->post('login', 'Auth::auth_login');
