@@ -36,6 +36,7 @@ class Auth extends BaseController {
 			      'bank_branch' => $cooperator['cooperator_bank_branch'],
 			      'sort_code' => $cooperator['cooperator_sort_code'],
 			      'date' => $cooperator['cooperator_date'],
+			      'approved_date' => $cooperator['cooperator_approved_date'],
 			      'savings' => $cooperator['cooperator_savings'],
 			      'status' => $cooperator['cooperator_status'],
 			      'active' => true

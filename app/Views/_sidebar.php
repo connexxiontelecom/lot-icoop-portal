@@ -141,13 +141,13 @@
               </a>
             </li>
             <li class="nk-menu-item has-sub">
-              <a href="#" class="nk-menu-link nk-menu-toggle">
+              <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
                 <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
                 <span class="nk-menu-text">Service Forms</span>
               </a>
               <ul class="nk-menu-sub">
                 <li class="nk-menu-item">
-                  <a href="#" class="nk-menu-link"><span class="nk-menu-text">Loan Application</span></a>
+                  <a href="/loan-application" class="nk-menu-link"><span class="nk-menu-text">Loan Application</span></a>
                 </li>
                 <li class="nk-menu-item">
                   <a href="#" class="nk-menu-link"><span class="nk-menu-text">Withdrawal Application</span></a>
