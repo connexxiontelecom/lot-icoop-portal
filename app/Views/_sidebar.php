@@ -183,6 +183,35 @@
             </li>
           </ul><!-- .nk-menu -->
         </div><!-- .nk-sidebar-menu -->
+        <div class="nk-sidebar-widget">
+          <div class="widget-title">
+            <h6 class="overline-title">Your Savings Types</h6>
+<!--            <a href="#" class="link">View All</a>-->
+          </div>
+          <?php $savings_types_details = $session->get('savings_types_details'); if (!empty($savings_types_details)):?>
+            <ul class="wallet-list">
+              <?php foreach ($savings_types_details as $savings_type => $detail):?>
+                <li class="wallet-item">
+                  <a href="javascript:void(0)">
+                    <div class="wallet-icon"><em class="icon ni ni-sign-kobo"></em></div>
+                    <div class="wallet-text">
+                      <h6 class="wallet-name"><?=$savings_type?></h6>
+                      <span class="wallet-balance"><?=number_format($detail, 2)?> </span>
+                    </div>
+                  </a>
+                </li>
+              <?php endforeach;?>
+<!--              <li class="wallet-item wallet-item-add">-->
+<!--                <a href="#">-->
+<!--                  <div class="wallet-icon"><em class="icon ni ni-plus"></em></div>-->
+<!--                  <div class="wallet-text">-->
+<!--                    <h6 class="wallet-name">Add another wallet</h6>-->
+<!--                  </div>-->
+<!--                </a>-->
+<!--              </li>-->
+            </ul>
+          <?php endif;?>
+        </div><!-- .nk-sidebar-widget -->
         <div class="nk-sidebar-footer">
           <ul class="nk-menu nk-menu-footer">
             <li class="nk-menu-item ml-auto">

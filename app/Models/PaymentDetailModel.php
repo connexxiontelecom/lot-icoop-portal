@@ -33,9 +33,9 @@ class PaymentDetailModel extends Model {
 		return $this->query_builder->get()->getResult();
 	}
 
-  public function get_regular_savings_payment_details_by_id($staff_id, $regular_savings_id): array {
+  public function get_savings_payment_details_by_id($staff_id, $savings_id): array {
     $this->query_builder->where('pd_staff_id', $staff_id);
-    $this->query_builder->where('pd_ct_id', $regular_savings_id);
+    $this->query_builder->where('pd_ct_id', $savings_id);
     return $this->query_builder->get()->getResult();
   }
 
