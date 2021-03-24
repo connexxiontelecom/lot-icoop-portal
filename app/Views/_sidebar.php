@@ -21,8 +21,8 @@
         <div class="nk-sidebar-widget d-none d-xl-block">
           <div class="user-account-info between-center">
             <div class="user-account-main">
-              <h6 class="overline-title-alt">Savings Balance</h6>
-              <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
+              <h6 class="overline-title-alt">Regular Savings</h6>
+              <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> <?=number_format($session->get('regular_savings'), 2)?></div>
             </div>
             <a href="#" class="btn btn-white btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
           </div>
@@ -73,8 +73,11 @@
           <div class="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
             <div class="user-account-info between-center">
               <div class="user-account-main">
-                <h6 class="overline-title-alt">Savings Balance</h6>
-                <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
+                <h6 class="overline-title-alt">Regular Savings</h6>
+                <div class="user-balance">
+                  <em class="icon ni ni-sign-kobo"></em>
+                  <?=number_format($session->get('regular_savings'), 2)?>
+                </div>
               </div>
               <a href="#" class="btn btn-icon btn-light"><em class="icon ni ni-line-chart"></em></a>
             </div>
@@ -173,7 +176,7 @@
               </a>
             </li>
             <li class="nk-menu-item">
-              <a href="html/crypto/profile.html" class="nk-menu-link">
+              <a href="#" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-account-setting"></em></span>
                 <span class="nk-menu-text">My Account</span>
               </a>
