@@ -1,6 +1,6 @@
 <?php
   $session = session();
-  $balance = 0; $total_dr = 0; $total_cr = 0;
+  $balance = $brought_forward; $total_dr = 0; $total_cr = 0;
   foreach ($payment_details as $payment_detail) {
 	  if ($payment_detail->pd_drcrtype == 2){
 		  $balance -= $payment_detail->pd_amount;
@@ -11,6 +11,7 @@
 		  $total_cr += $payment_detail->pd_amount;
 	  }
   }
+  $sn = 1;
 ?>
 <!DOCTYPE html>
 <html lang="en" class="js">
@@ -35,7 +36,7 @@
               <div class="nk-block nk-block-lg">
                 <div class="nk-block-head">
                   <div class="nk-block-head-content">
-                    <h4 class="nk-block-title"><?= $savings_type['contribution_type_name']?> Ledger</h4>
+                    <h4 class="nk-block-title"><?= $savings_type_ledger['contribution_type_name']?> Ledger</h4>
                     <div class="nk-block-des">
                       <p>
                         This is the periodic summary of your account activity starting from
@@ -59,8 +60,27 @@
                     </div>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <div class="col-md-4">
+                <div class="row mb-3 gy-3">
+                  <div class="col-md-3">
+                    <div class="card card-bordered card-full">
+                      <div class="card-inner">
+                        <div class="card-title-group align-start mb-0">
+                          <div class="card-title">
+                            <h6 class="subtitle">BF</h6>
+                          </div>
+                          <div class="card-tools">
+                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Brought Forward"></em>
+                          </div>
+                        </div>
+                        <div class="card-amount">
+                          <span class="amount">
+                            <?= number_format($brought_forward, 2, '.', ',');?>
+                          </span>
+                        </div>
+                      </div>
+                    </div><!-- .card -->
+                  </div><!-- .col -->
+                  <div class="col-md-3">
                     <div class="card card-bordered card-full">
                       <div class="card-inner">
                         <div class="card-title-group align-start mb-0">
@@ -79,7 +99,7 @@
                       </div>
                     </div><!-- .card -->
                   </div><!-- .col -->
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="card card-bordered card-full">
                       <div class="card-inner">
                         <div class="card-title-group align-start mb-0">
@@ -98,7 +118,7 @@
                       </div>
                     </div><!-- .card -->
                   </div><!-- .col -->
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="card card-bordered card-full">
                       <div class="card-inner">
                         <div class="card-title-group align-start mb-0">
@@ -118,11 +138,12 @@
                     </div><!-- .card -->
                   </div><!-- .col -->
                 </div>
-                <div class="card card-preview">
+                <div class="card card-preview mt-3">
                   <div class="card-inner">
                     <table class="datatable-init table">
                       <thead>
                       <tr>
+                        <th>S/n</th>
                         <th>Date</th>
                         <th>Narration</th>
                         <th class="text-right">DR</th>
@@ -131,8 +152,17 @@
                       </tr>
                       </thead>
                       <tbody>
-                        <?php if (!empty($payment_details)): $balance = 0; $total_dr = 0; $total_cr = 0; foreach ($payment_details as $payment_detail): ?>
+                        <tr class="font-weight-bolder">
+                          <td><?=$sn++?></td>
+                          <td>-</td>
+                          <td>BF</td>
+                          <td class="text-right text-danger"><?=number_format(0,2)?></td>
+                          <td class="text-right text-success"><?=number_format($brought_forward, 2)?></td>
+                          <td class="text-right"><?=number_format($brought_forward, 2)?></td>
+                        </tr>
+                        <?php if (!empty($payment_details)): $balance = $brought_forward; $total_dr = 0; $total_cr = 0; foreach ($payment_details as $payment_detail): ?>
                           <tr>
+                            <td><?=$sn?></td>
                             <td>
                               <?php
                                 $transaction_date = DateTime::createFromFormat('Y-m-d', $payment_detail->pd_transaction_date);
@@ -165,8 +195,9 @@
                               <?=number_format($balance, 2, '.', ',');?>
                             </td>
                           </tr>
-                        <?php endforeach; endif;?>
+                        <?php $sn++; endforeach; endif;?>
                         <tr class="border-primary">
+                          <td class="font-weight-bolder"><?=$sn?></td>
                           <td class="font-weight-bolder">
 	                          <?php
                               $date = date_create($end_date);

@@ -41,7 +41,7 @@ $session = session();
                               <div class="form-group mt-3">
                                 <label class="form-label font-weight-bolder" for="loan-type">Loan Type</label>
                                 <div class="form-control-wrap">
-                                  <select class="form-select form-control" data-ui="lg" data-search="on" id="loan-type" name="loan_type" required>
+                                  <select class="form-select form-control" data-search="on" id="loan-type" name="loan_type" required>
                                     <option value="default">Default Option</option>
                                     <?php if (!empty($loan_types)): foreach ($loan_types as $loan_type): ?>
                                       <option value="<?=$loan_type['loan_setup_id']?>">
@@ -57,7 +57,7 @@ $session = session();
                               <div class="form-group">
                                 <label class="form-label font-weight-bolder" for="loan-duration">Loan Duration (Months)</label>
                                 <div class="form-control-wrap">
-                                  <input type="number" class="form-control form-control-lg" id="loan-duration" name="loan_duration" required disabled>
+                                  <input type="number" class="form-control" id="loan-duration" name="loan_duration" required disabled>
                                   <div id="loan-duration-note" class="form-note"></div>
                                 </div>
                               </div>
@@ -66,7 +66,7 @@ $session = session();
                               <div class="form-group">
                                 <label class="form-label font-weight-bolder" for="loan-amount">Loan Amount</label>
                                 <div class="form-control-wrap">
-                                  <input type="number" class="form-control form-control-lg" id="loan-amount" name="loan_amount" required disabled>
+                                  <input type="number" class="form-control" id="loan-amount" name="loan_amount" required disabled>
                                   <div id="loan-amount-note" class="form-note"></div>
                                 </div>
                               </div>
@@ -76,12 +76,15 @@ $session = session();
                                 <label class="form-label font-weight-bolder">File Attachment (PDF)</label>
                                 <div class="form-control-wrap">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" data-ui="lg" id="loan-attachment" name="loan_attachment" accept="application/pdf" disabled>
+                                    <input type="file" class="custom-file-input" id="loan-attachment" name="loan_attachment" accept="application/pdf" disabled>
                                     <label class="custom-file-label" for="loan-attachment">Choose file</label>
                                   </div>
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div class="preview-block">
+                            <span class="preview-title-lg overline-title mt-5">Guarantor Details</span>
                           </div>
                         </form>
                       </div>
@@ -183,6 +186,7 @@ $session = session();
               $('#qualification-age-failed').attr('hidden', true)
               $('#loan-duration').attr('disabled', false)
               $('#loan-amount').attr('disabled', false)
+              $('#loan-attachment').attr('disabled', false)
             } else {
               $('#qualification-age-failed').attr('hidden', false)
               $('#qualification-age-passed').attr('hidden', true)
@@ -195,6 +199,7 @@ $session = session();
               $('#loan-amount-failed').attr('hidden', true)
               $('#loan-psr-passed').attr('hidden', true)
               $('#loan-psr-failed').attr('hidden', true)
+              $('#loan-attachment').attr('disabled', true)
             }
           }
         })
@@ -215,6 +220,7 @@ $session = session();
         $('#loan-amount-failed').attr('hidden', true)
         $('#loan-psr-passed').attr('hidden', true)
         $('#loan-psr-failed').attr('hidden', true)
+        $('#loan-attachment').attr('disabled', true)
       }
     })
 
