@@ -19,10 +19,10 @@ class Auth extends BaseController {
       if ($cooperator) {
       	if (password_verify($password, $cooperator['cooperator_password'])) {
       		$user_data = array(
-      			'firstname' => $cooperator['cooperator_first_name'],
-			      'lastname' => $cooperator['cooperator_last_name'],
-			      'othername' => $cooperator['cooperator_other_name'],
-			      'staff_id' => $cooperator['cooperator_staff_id'],
+            'staff_id' => $cooperator['cooperator_staff_id'],
+            'firstname' => $cooperator['cooperator_first_name'],
+            'lastname' => $cooperator['cooperator_last_name'],
+            'othername' => $cooperator['cooperator_other_name'],
 			      'dob' => $cooperator['cooperator_dob'],
 			      'email' => $cooperator['cooperator_email'],
 			      'address' => $cooperator['cooperator_address'],
@@ -39,6 +39,7 @@ class Auth extends BaseController {
 			      'approved_date' => $cooperator['cooperator_approved_date'],
 			      'savings' => $cooperator['cooperator_savings'],
 			      'status' => $cooperator['cooperator_status'],
+			      'regular_savings' => $this->_get_regular_savings($cooperator['cooperator_staff_id']),
 			      'active' => true
 		      );
       		$this->session->set($user_data);
@@ -57,5 +58,17 @@ class Auth extends BaseController {
   		$this->session->destroy();
 	  }
   	return redirect('auth/login');
+  }
+
+  private function _get_regular_savings($staff_id): int {
+    $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
+    $regular_savings_payment_details = $this->paymentDetailModel->get_regular_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
+    $total_dr = 0;
+    $total_cr = 0;
+    foreach ($regular_savings_payment_details as $regular_savings_payment_detail) {
+      if ($regular_savings_payment_detail->pd_drcrtype == 1) $total_cr += $regular_savings_payment_detail->pd_amount;
+      if ($regular_savings_payment_detail->pd_drcrtype == 2) $total_dr += $regular_savings_payment_detail->pd_amount;
+    }
+    return $total_cr - $total_dr;
   }
 }

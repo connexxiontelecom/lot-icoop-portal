@@ -67,8 +67,8 @@
                 </div>
               </div>
               <div class="dropdown-inner user-account-info">
-                <h6 class="overline-title-alt">Savings Balance</h6>
-                <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
+                <h6 class="overline-title-alt">Regular Savings</h6>
+                <div class="user-balance"><em class="icon ni ni-sign-kobo"></em> <?=number_format($session->get('regular_savings'), 2)?></div>
                 <a href="#" class="link mt-2"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a>
               </div>
               <div class="dropdown-inner">
