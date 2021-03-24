@@ -46,21 +46,30 @@
                           <div class="card-inner">
                             <div class="nk-wg7">
                               <div class="nk-wg7-stats">
-                                <div class="nk-wg7-title">Savings Balance</div>
-                                <div class="number-lg amount"><em class="icon ni ni-sign-kobo"></em> 179,850.00</div>
+                                <div class="nk-wg7-title">Regular Savings</div>
+                                <div class="number-lg amount"><em class="icon ni ni-sign-kobo"></em> <?=number_format($session->get('regular_savings'), 2)?></div>
                               </div>
                               <div class="nk-wg7-stats-group">
                                 <div class="nk-wg7-stats w-50">
-                                  <div class="nk-wg7-title">Savings Types</div>
-                                  <div class="number-lg">5</div>
+                                  <div class="nk-wg7-title">Encumbered <br> Savings</div>
+                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 50,000.00</div>
                                 </div>
                                 <div class="nk-wg7-stats w-50">
-                                  <div class="nk-wg7-title">Free Savings</div>
+                                  <div class="nk-wg7-title">Free <br> Savings</div>
                                   <div class="number"><em class="icon ni ni-sign-kobo"></em> 34,405.00</div>
                                 </div>
                               </div>
                               <div class="nk-wg7-foot">
-                                <span class="nk-wg7-note">Last activity at <span>19 Jan, 2020</span></span>
+                                <span class="nk-wg7-note">Last activity at
+                                  <span>
+                                    <?php
+                                      $timeZone = 'Africa/Lagos';
+                                      date_default_timezone_set($timeZone);
+                                      $date = date_create();
+                                      echo date_format($date, 'd M Y h:i a');
+                                    ?>
+                                  </span>
+                                </span>
                               </div>
                             </div><!-- .nk-wg7 -->
                           </div><!-- .card-inner -->
