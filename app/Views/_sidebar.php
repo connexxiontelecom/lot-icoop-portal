@@ -35,18 +35,10 @@
                 <span class="lead-text"><em class="icon ni ni-sign-kobo"></em> <?= number_format($session->get('savings'),2, '.', ',') ?></span>
               </div>
             </li>
-<!--            <li>-->
-<!--              <div class="user-account-label">-->
-<!--                <span class="sub-text">Deposit in orders</span>-->
-<!--              </div>-->
-<!--              <div class="user-account-value">-->
-<!--                <span class="sub-text">0.005400 <span class="currency currency-btc">BTC</span></span>-->
-<!--              </div>-->
-<!--            </li>-->
           </ul>
           <div class="user-account-actions">
             <ul class="g-3">
-              <li><a href="#" class="btn btn-lg btn-primary"><span>Loan</span></a></li>
+              <li><a href="/loan-application" class="btn btn-lg btn-primary"><span>Loan</span></a></li>
               <li><a href="#" class="btn btn-lg btn-warning"><span>Withdraw</span></a></li>
             </ul>
           </div>
@@ -101,7 +93,7 @@
             </ul>
             <ul class="user-account-links">
               <li><a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a></li>
-              <li><a href="#" class="link"><span>Loan Funds</span> <em class="icon ni ni-wallet-in"></em></a></li>
+              <li><a href="/loan-application" class="link"><span>Loan Funds</span> <em class="icon ni ni-wallet-in"></em></a></li>
             </ul>
             <ul class="link-list">
               <li><a href="#"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
@@ -188,15 +180,15 @@
             <h6 class="overline-title">Your Savings Types</h6>
 <!--            <a href="#" class="link">View All</a>-->
           </div>
-          <?php $savings_types_details = $session->get('savings_types_details'); if (!empty($savings_types_details)):?>
+          <?php $savings_types_amounts = $session->get('savings_types_amounts'); if (!empty($savings_types_amounts)):?>
             <ul class="wallet-list">
-              <?php foreach ($savings_types_details as $savings_type => $detail):?>
+              <?php foreach ($savings_types_amounts as $savings_type => $amount):?>
                 <li class="wallet-item">
-                  <a href="javascript:void(0)">
+                  <a href="/account-statement">
                     <div class="wallet-icon"><em class="icon ni ni-sign-kobo"></em></div>
                     <div class="wallet-text">
                       <h6 class="wallet-name"><?=$savings_type?></h6>
-                      <span class="wallet-balance"><?=number_format($detail, 2)?> </span>
+                      <span class="wallet-balance"><?=number_format($amount, 2)?> </span>
                     </div>
                   </a>
                 </li>

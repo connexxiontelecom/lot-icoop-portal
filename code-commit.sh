@@ -19,3 +19,7 @@ git commit -m "$commit"
 sleep 2s
 echo "Okay I'm pushing your code now.. fingers crossed"
 git push
+sleep 2s
+echo "All done.. don't forget to push to dev for conflict resolution and then pull again to fast-forward your branch"
+sleep 2s
+echo "Perhaps you can automate PRs as well from here. Enjoy, CJ"

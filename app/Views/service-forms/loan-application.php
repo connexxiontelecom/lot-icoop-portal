@@ -91,7 +91,7 @@ $session = session();
                               <div class="form-group mt-3">
                                 <label class="form-label font-weight-bolder" for="guarantor-1">1st Guarantor</label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control" id="guarantor-1" name="guarantor_1" required>
+                                  <input type="text" class="form-control" id="guarantor-1" name="guarantor_1" disabled required>
                                 </div>
                               </div>
                             </div>
@@ -99,7 +99,7 @@ $session = session();
                               <div class="form-group">
                                 <label class="form-label font-weight-bolder" for="guarantor-2">2nd Guarantor</label>
                                 <div class="form-control-wrap">
-                                  <input type="text" class="form-control" id="guarantor-2" name="guarantor_2" required>
+                                  <input type="text" class="form-control" id="guarantor-2" name="guarantor_2" disabled required>
                                 </div>
                               </div>
                             </div>
@@ -210,6 +210,8 @@ $session = session();
               $('#loan-duration').attr('disabled', false)
               $('#loan-amount').attr('disabled', false)
               $('#loan-attachment').attr('disabled', false)
+              $('#guarantor-1').attr('disabled', false)
+              $('#guarantor-2').attr('disabled', false)
             } else {
               $('#qualification-age-failed').attr('hidden', false)
               $('#qualification-age-passed').attr('hidden', true)
@@ -223,6 +225,8 @@ $session = session();
               $('#loan-psr-passed').attr('hidden', true)
               $('#loan-psr-failed').attr('hidden', true)
               $('#loan-attachment').attr('disabled', true)
+              $('#guarantor-1').attr('disabled', true)
+              $('#guarantor-2').attr('disabled', true)
             }
           }
         })
@@ -244,6 +248,8 @@ $session = session();
         $('#loan-psr-passed').attr('hidden', true)
         $('#loan-psr-failed').attr('hidden', true)
         $('#loan-attachment').attr('disabled', true)
+        $('#guarantor-1').attr('disabled', false)
+        $('#guarantor-2').attr('disabled', false)
       }
     })
 
@@ -292,6 +298,33 @@ $session = session();
         $('#loan-amount-passed').attr('hidden', true)
         $('#loan-psr-passed').attr('hidden', true)
         $('#loan-psr-failed').attr('hidden', true)
+      }
+    })
+
+    //
+    $('#guarantor-1').autocomplete({
+      source: function (req, res) {
+        $.ajax({
+          url: '<?= site_url('loan-application/get-guarantors')?>',
+          type: 'post',
+          dataType: 'json',
+          data: {
+            search: req.term,
+            user: '<?=$session->get('staff_id')?>'
+          },
+          success: function (data) {
+            console.log(data)
+            res(data)
+          }
+        })
+      },
+      select: function (event, ui) {
+        $('#guarantor-1').val(ui.item.label)
+        return false
+      },
+      focus: function (event, ui) {
+        $('#guarantor-1').val(ui.item.label)
+        return false
       }
     })
   })

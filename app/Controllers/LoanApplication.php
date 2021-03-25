@@ -16,4 +16,18 @@ class LoanApplication extends BaseController {
     $loan_setup_details = $this->loanSetupModel->find($loan_setup_id);
     return json_encode($loan_setup_details);
   }
+
+  function get_guarantor_cooperators() {
+    $post_data = $this->request->getPost();
+    $staff_id = $this->session->get('staff_id');
+    $response_data = array();
+    if ($post_data) {
+      $cooperators = $this->cooperatorModel->search_cooperators($post_data['search']);
+      foreach ($cooperators as $cooperator) {
+        if ($cooperator->cooperator_staff_id != $staff_id)
+          $response_data[] = $cooperator->cooperator_staff_id . ', ' . $cooperator->cooperator_first_name . ' ' . $cooperator->cooperator_last_name;
+      }
+    }
+    return $this->response->setJSON($response_data);
+  }
 }

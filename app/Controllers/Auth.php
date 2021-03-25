@@ -40,7 +40,7 @@ class Auth extends BaseController {
 			      'savings' => $cooperator['cooperator_savings'],
 			      'status' => $cooperator['cooperator_status'],
 			      'regular_savings' => $this->_get_regular_savings($cooperator['cooperator_staff_id']),
-			      'savings_types_details' => $this->_get_savings_types_details($cooperator['cooperator_staff_id']),
+			      'savings_types_amounts' => $this->_get_savings_types_amounts($cooperator['cooperator_staff_id']),
 			      'active' => true
 		      );
       		$this->session->set($user_data);
@@ -84,19 +84,19 @@ class Auth extends BaseController {
     return $savings_types;
   }
 
-  private function _get_savings_types_details($staff_id): array {
+  private function _get_savings_types_amounts($staff_id): array {
     $savings_types = $this->_get_savings_types();
-    $savings_types_details = array();
+    $savings_types_amounts = array();
     foreach ($savings_types as $savings_type) {
       $total_dr = 0;
       $total_cr = 0;
-      $savings_payment_details = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $savings_type['contribution_type_id']);
-      foreach ($savings_payment_details as $savings_payment_detail) {
-        if ($savings_payment_detail->pd_drcrtype == 1) $total_cr += $savings_payment_detail->pd_amount;
-        if ($savings_payment_detail->pd_drcrtype == 2) $total_dr += $savings_payment_detail->pd_amount;
+      $savings_payment_amounts = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $savings_type['contribution_type_id']);
+      foreach ($savings_payment_amounts as $savings_payment_amount) {
+        if ($savings_payment_amount->pd_drcrtype == 1) $total_cr += $savings_payment_amount->pd_amount;
+        if ($savings_payment_amount->pd_drcrtype == 2) $total_dr += $savings_payment_amount->pd_amount;
       }
-      $savings_types_details[$savings_type['contribution_type_name']] = $total_cr - $total_dr;
+      $savings_types_amounts[$savings_type['contribution_type_name']] = $total_cr - $total_dr;
     }
-    return $savings_types_details;
+    return $savings_types_amounts;
   }
 }
