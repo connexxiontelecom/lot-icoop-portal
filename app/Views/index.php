@@ -34,7 +34,7 @@
               </div><!-- .nk-block-head -->
               <div class="nk-block">
                 <div class="row gy-gs">
-                  <div class="col-lg-5 col-xl-4">
+                  <div class="col-lg-6 col-xl-5">
                     <div class="nk-block">
                       <div class="nk-block-head-xs">
                         <div class="nk-block-head-content">
@@ -50,16 +50,16 @@
                                 <div class="number-lg amount"><em class="icon ni ni-sign-kobo"></em> <?=number_format($session->get('regular_savings'), 2)?></div>
                               </div>
                               <div class="nk-wg7-stats-group">
-                                <div class="nk-wg7-stats w-50">
-                                  <div class="nk-wg7-title">Encumbered <br> Savings</div>
-                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 50,000.00</div>
+                                <div class="nk-wg7-stats w-100">
+                                  <div class="nk-wg7-title">Encumbered Savings</div>
+                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 50,000,000.00</div>
                                 </div>
-                                <div class="nk-wg7-stats w-50">
-                                  <div class="nk-wg7-title">Free <br> Savings</div>
-                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 34,405.00</div>
+                                <div class="nk-wg7-stats w-100">
+                                  <div class="nk-wg7-title">Free Savings</div>
+                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 34,000,405.00</div>
                                 </div>
                               </div>
-                              <div class="nk-wg7-foot">
+                              <div class="nk-wg7-foot mt-4">
                                 <span class="nk-wg7-note">Last activity at
                                   <span>
                                     <?php
@@ -77,7 +77,7 @@
                       </div><!-- .nk-block -->
                     </div><!-- .nk-block -->
                   </div><!-- .col -->
-                  <div class="col-lg-7 col-xl-8">
+                  <div class="col-lg-6 col-xl-7">
                     <div class="nk-block">
                       <div class="nk-block-head-xs">
                         <div class="nk-block-between-md g-2">
