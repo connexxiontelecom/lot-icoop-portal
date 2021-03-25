@@ -36,7 +36,7 @@ $session = session();
                           <div class="preview-block">
                             <span class="preview-title-lg overline-title">Loan Details</span>
                           </div>
-                          <div class="row gy-4">
+                          <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
                                 <label class="form-label font-weight-bolder" for="loan-type">Loan Type</label>
@@ -85,6 +85,29 @@ $session = session();
                           </div>
                           <div class="preview-block">
                             <span class="preview-title-lg overline-title mt-5">Guarantor Details</span>
+                          </div>
+                          <div class="row gy-3">
+                            <div class="col-12">
+                              <div class="form-group mt-3">
+                                <label class="form-label font-weight-bolder" for="guarantor-1">1st Guarantor</label>
+                                <div class="form-control-wrap">
+                                  <input type="text" class="form-control" id="guarantor-1" name="guarantor_1" required>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label class="form-label font-weight-bolder" for="guarantor-2">2nd Guarantor</label>
+                                <div class="form-control-wrap">
+                                  <input type="text" class="form-control" id="guarantor-2" name="guarantor_2" required>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group mt-3">
+                                <button class="btn btn-lg btn-primary">Submit Application</button>
+                              </div>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -225,7 +248,7 @@ $session = session();
     })
 
     // perform these when user enters loan duration
-    $(document).on('blur', '#loan-duration', function(e) {
+    $(document).on('keyup', '#loan-duration', function(e) {
       e.preventDefault()
       let selectedLoanDuration = $(this).val()
       if (selectedLoanDuration) {
@@ -236,11 +259,14 @@ $session = session();
           $('#loan-duration-failed').attr('hidden', false)
           $('#loan-duration-passed').attr('hidden', true)
         }
+      } else {
+        $('#loan-duration-failed').attr('hidden', true)
+        $('#loan-duration-passed').attr('hidden', true)
       }
     })
 
     // perform these when user enters an amount
-    $(document).on('blur', '#loan-amount', function(e) {
+    $(document).on('keyup', '#loan-amount', function(e) {
       e.preventDefault()
       let selectedLoanAmount = $(this).val()
       if (selectedLoanAmount) {
@@ -261,6 +287,11 @@ $session = session();
             $('#loan-psr-failed').attr('hidden', false)
           }
         }
+      } else {
+        $('#loan-amount-failed').attr('hidden', true)
+        $('#loan-amount-passed').attr('hidden', true)
+        $('#loan-psr-passed').attr('hidden', true)
+        $('#loan-psr-failed').attr('hidden', true)
       }
     })
   })
