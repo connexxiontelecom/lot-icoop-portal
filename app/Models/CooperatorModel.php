@@ -2,6 +2,9 @@
 use CodeIgniter\Model;
 
 class CooperatorModel extends Model {
+  private $db_instance;
+  private $query_builder;
+
   protected $table = 'cooperators';
   protected $primaryKey = 'cooperator_id';
   protected $allowedFields = [
@@ -12,4 +15,17 @@ class CooperatorModel extends Model {
     'cooperator_bank_branch', 'cooperator_sort_code', 'cooperator_date', 'cooperator_savings', 'cooperator_verify_by', 'cooperator_verify_date', 'cooperator_verify_comment', 'cooperator_approved_by',
     'cooperator_approved_date', 'cooperator_approved_comment', 'cooperator_discarded_by', 'cooperator_discarded_date', 'cooperator_discarded_reason', 'cooperator_status'
   ];
+
+  public function __construct() {
+    parent::__construct();
+    $this->db_instance = db_connect();
+    $this->query_builder = $this->db_instance->table('cooperators');
+  }
+
+  public function search_cooperators($search_value): array {
+    $this->query_builder->like('cooperator_staff_id', $search_value);
+    $this->query_builder->orLike('cooperator_first_name', $search_value);
+    $this->query_builder->orLike('cooperator_last_name', $search_value);
+    return $this->query_builder->get()->getResult();
+  }
 }

@@ -40,6 +40,7 @@ class Auth extends BaseController {
 			      'savings' => $cooperator['cooperator_savings'],
 			      'status' => $cooperator['cooperator_status'],
 			      'regular_savings' => $this->_get_regular_savings($cooperator['cooperator_staff_id']),
+			      'savings_types_amounts' => $this->_get_savings_types_amounts($cooperator['cooperator_staff_id']),
 			      'active' => true
 		      );
       		$this->session->set($user_data);
@@ -62,7 +63,7 @@ class Auth extends BaseController {
 
   private function _get_regular_savings($staff_id): int {
     $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
-    $regular_savings_payment_details = $this->paymentDetailModel->get_regular_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
+    $regular_savings_payment_details = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
     $total_dr = 0;
     $total_cr = 0;
     foreach ($regular_savings_payment_details as $regular_savings_payment_detail) {
@@ -70,5 +71,32 @@ class Auth extends BaseController {
       if ($regular_savings_payment_detail->pd_drcrtype == 2) $total_dr += $regular_savings_payment_detail->pd_amount;
     }
     return $total_cr - $total_dr;
+  }
+
+  private function _get_savings_types(): array {
+    $staff_id = $this->session->get('staff_id');
+    $payment_details = $this->paymentDetailModel->get_payment_details_by_staff_id($staff_id);
+    $savings_types = array();
+    foreach($payment_details as $payment_detail) {
+      $savings_type = $this->contributionTypeModel->where('contribution_type_id', $payment_detail->pd_ct_id)->first();
+      array_push($savings_types, $savings_type);
+    }
+    return $savings_types;
+  }
+
+  private function _get_savings_types_amounts($staff_id): array {
+    $savings_types = $this->_get_savings_types();
+    $savings_types_amounts = array();
+    foreach ($savings_types as $savings_type) {
+      $total_dr = 0;
+      $total_cr = 0;
+      $savings_payment_amounts = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $savings_type['contribution_type_id']);
+      foreach ($savings_payment_amounts as $savings_payment_amount) {
+        if ($savings_payment_amount->pd_drcrtype == 1) $total_cr += $savings_payment_amount->pd_amount;
+        if ($savings_payment_amount->pd_drcrtype == 2) $total_dr += $savings_payment_amount->pd_amount;
+      }
+      $savings_types_amounts[$savings_type['contribution_type_name']] = $total_cr - $total_dr;
+    }
+    return $savings_types_amounts;
   }
 }

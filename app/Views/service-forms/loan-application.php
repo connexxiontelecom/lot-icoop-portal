@@ -36,12 +36,12 @@ $session = session();
                           <div class="preview-block">
                             <span class="preview-title-lg overline-title">Loan Details</span>
                           </div>
-                          <div class="row gy-4">
+                          <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
                                 <label class="form-label font-weight-bolder" for="loan-type">Loan Type</label>
                                 <div class="form-control-wrap">
-                                  <select class="form-select form-control" data-ui="lg" data-search="on" id="loan-type" name="loan_type" required>
+                                  <select class="form-select form-control" data-search="on" id="loan-type" name="loan_type" required>
                                     <option value="default">Default Option</option>
                                     <?php if (!empty($loan_types)): foreach ($loan_types as $loan_type): ?>
                                       <option value="<?=$loan_type['loan_setup_id']?>">
@@ -57,7 +57,7 @@ $session = session();
                               <div class="form-group">
                                 <label class="form-label font-weight-bolder" for="loan-duration">Loan Duration (Months)</label>
                                 <div class="form-control-wrap">
-                                  <input type="number" class="form-control form-control-lg" id="loan-duration" name="loan_duration" required disabled>
+                                  <input type="number" class="form-control" id="loan-duration" name="loan_duration" required disabled>
                                   <div id="loan-duration-note" class="form-note"></div>
                                 </div>
                               </div>
@@ -66,7 +66,7 @@ $session = session();
                               <div class="form-group">
                                 <label class="form-label font-weight-bolder" for="loan-amount">Loan Amount</label>
                                 <div class="form-control-wrap">
-                                  <input type="number" class="form-control form-control-lg" id="loan-amount" name="loan_amount" required disabled>
+                                  <input type="number" class="form-control" id="loan-amount" name="loan_amount" required disabled>
                                   <div id="loan-amount-note" class="form-note"></div>
                                 </div>
                               </div>
@@ -76,10 +76,36 @@ $session = session();
                                 <label class="form-label font-weight-bolder">File Attachment (PDF)</label>
                                 <div class="form-control-wrap">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" data-ui="lg" id="loan-attachment" name="loan_attachment" accept="application/pdf" disabled>
+                                    <input type="file" class="custom-file-input" id="loan-attachment" name="loan_attachment" accept="application/pdf" disabled>
                                     <label class="custom-file-label" for="loan-attachment">Choose file</label>
                                   </div>
                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="preview-block">
+                            <span class="preview-title-lg overline-title mt-5">Guarantor Details</span>
+                          </div>
+                          <div class="row gy-3">
+                            <div class="col-12">
+                              <div class="form-group mt-3">
+                                <label class="form-label font-weight-bolder" for="guarantor-1">1st Guarantor</label>
+                                <div class="form-control-wrap">
+                                  <input type="text" class="form-control" id="guarantor-1" name="guarantor_1" disabled required>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label class="form-label font-weight-bolder" for="guarantor-2">2nd Guarantor</label>
+                                <div class="form-control-wrap">
+                                  <input type="text" class="form-control" id="guarantor-2" name="guarantor_2" disabled required>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group mt-3">
+                                <button class="btn btn-lg btn-primary">Submit Application</button>
                               </div>
                             </div>
                           </div>
@@ -183,6 +209,9 @@ $session = session();
               $('#qualification-age-failed').attr('hidden', true)
               $('#loan-duration').attr('disabled', false)
               $('#loan-amount').attr('disabled', false)
+              $('#loan-attachment').attr('disabled', false)
+              $('#guarantor-1').attr('disabled', false)
+              $('#guarantor-2').attr('disabled', false)
             } else {
               $('#qualification-age-failed').attr('hidden', false)
               $('#qualification-age-passed').attr('hidden', true)
@@ -195,6 +224,9 @@ $session = session();
               $('#loan-amount-failed').attr('hidden', true)
               $('#loan-psr-passed').attr('hidden', true)
               $('#loan-psr-failed').attr('hidden', true)
+              $('#loan-attachment').attr('disabled', true)
+              $('#guarantor-1').attr('disabled', true)
+              $('#guarantor-2').attr('disabled', true)
             }
           }
         })
@@ -215,11 +247,14 @@ $session = session();
         $('#loan-amount-failed').attr('hidden', true)
         $('#loan-psr-passed').attr('hidden', true)
         $('#loan-psr-failed').attr('hidden', true)
+        $('#loan-attachment').attr('disabled', true)
+        $('#guarantor-1').attr('disabled', false)
+        $('#guarantor-2').attr('disabled', false)
       }
     })
 
     // perform these when user enters loan duration
-    $(document).on('blur', '#loan-duration', function(e) {
+    $(document).on('keyup', '#loan-duration', function(e) {
       e.preventDefault()
       let selectedLoanDuration = $(this).val()
       if (selectedLoanDuration) {
@@ -230,11 +265,14 @@ $session = session();
           $('#loan-duration-failed').attr('hidden', false)
           $('#loan-duration-passed').attr('hidden', true)
         }
+      } else {
+        $('#loan-duration-failed').attr('hidden', true)
+        $('#loan-duration-passed').attr('hidden', true)
       }
     })
 
     // perform these when user enters an amount
-    $(document).on('blur', '#loan-amount', function(e) {
+    $(document).on('keyup', '#loan-amount', function(e) {
       e.preventDefault()
       let selectedLoanAmount = $(this).val()
       if (selectedLoanAmount) {
@@ -255,6 +293,38 @@ $session = session();
             $('#loan-psr-failed').attr('hidden', false)
           }
         }
+      } else {
+        $('#loan-amount-failed').attr('hidden', true)
+        $('#loan-amount-passed').attr('hidden', true)
+        $('#loan-psr-passed').attr('hidden', true)
+        $('#loan-psr-failed').attr('hidden', true)
+      }
+    })
+
+    //
+    $('#guarantor-1').autocomplete({
+      source: function (req, res) {
+        $.ajax({
+          url: '<?= site_url('loan-application/get-guarantors')?>',
+          type: 'post',
+          dataType: 'json',
+          data: {
+            search: req.term,
+            user: '<?=$session->get('staff_id')?>'
+          },
+          success: function (data) {
+            console.log(data)
+            res(data)
+          }
+        })
+      },
+      select: function (event, ui) {
+        $('#guarantor-1').val(ui.item.label)
+        return false
+      },
+      focus: function (event, ui) {
+        $('#guarantor-1').val(ui.item.label)
+        return false
       }
     })
   })
