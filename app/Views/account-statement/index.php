@@ -44,11 +44,11 @@
                                     <div class="form-control-wrap">
                                       <select class="form-select form-control form-control-xl" data-ui="xl" id="savings-type" name="savings_type" required>
                                         <option value="default" class="bold">Default Option</option>
-                                        <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type): ?>
-                                          <option value="<?=$savings_type['contribution_type_id']?>">
-                                            <?=$savings_type['contribution_type_name']?>
+                                        <?php if (!empty($user_savings_types)): foreach ($user_savings_types as $user_savings_type): if($user_savings_type): ?>
+                                          <option value="<?=$user_savings_type['contribution_type_id']?>">
+                                            <?=$user_savings_type['contribution_type_name']?>
                                           </option>
-                                        <?php endforeach; endif; ?>
+                                        <?php endif; endforeach; endif; ?>
                                       </select>
                                       <label class="form-label-outlined" for="savings-type">Select Savings Type</label>
                                     </div>
