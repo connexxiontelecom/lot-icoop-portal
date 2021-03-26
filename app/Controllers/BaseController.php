@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\AccountClosureModel;
@@ -8,16 +7,20 @@ use App\Models\ContributionTypeModel;
 use App\Models\CooperatorModel;
 use App\Models\DepartmentModel;
 use App\Models\LoanApplicationModel;
+use App\Models\LoanGuarantorModel;
 use App\Models\LoanModel;
 use App\Models\LoanSetupModel;
 use App\Models\LocationModel;
+use App\Models\NotificationModel;
 use App\Models\PaymentDetailModel;
 use App\Models\PayrollGroupModel;
 use App\Models\StateModel;
 use App\Models\WithdrawModel;
+
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+
 use Psr\Log\LoggerInterface;
 
 /**
@@ -49,9 +52,11 @@ class BaseController extends Controller
 	protected $cooperatorModel;
 	protected $departmentModel;
 	protected $loanApplicationModel;
+	protected $loanGuarantorModel;
 	protected $loanModel;
 	protected $loanSetupModel;
 	protected $locationModel;
+	protected $notificationModel;
 	protected $paymentDetailModel;
 	protected $payrollGroupModel;
 	protected $stateModel;
@@ -81,15 +86,19 @@ class BaseController extends Controller
     $this->cooperatorModel = new CooperatorModel();
     $this->departmentModel = new DepartmentModel();
     $this->loanApplicationModel = new LoanApplicationModel();
+    $this->loanGuarantorModel = new LoanGuarantorModel();
     $this->loanModel = new LoanModel();
     $this->loanSetupModel = new LoanSetupModel();
     $this->locationModel = new LocationModel();
+    $this->notificationModel = new NotificationModel();
     $this->paymentDetailModel = new PaymentDetailModel();
     $this->payrollGroupModel = new PayrollGroupModel();
     $this->stateModel = new StateModel();
     $this->withdrawModel = new WithdrawModel();
 	}
 
+	// calculate the difference between total credits and total debits for all payments in the regular savings type
+  // to determine the total regular savings amount
   protected function _get_regular_savings_amount($staff_id): int {
     $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
     $regular_savings_payment_details = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
@@ -100,5 +109,14 @@ class BaseController extends Controller
       if ($regular_savings_payment_detail->pd_drcrtype == 2) $total_dr += $regular_savings_payment_detail->pd_amount;
     }
     return $total_cr - $total_dr;
+  }
+
+  protected function _create_new_notification($type, $topic, $receiver_id, $details) {
+	  $notification_data = array();
+    $notification_data['type'] = $type;
+    $notification_data['topic'] = $topic;
+    $notification_data['receiver_id'] = $receiver_id;
+    $notification_data['details'] = $details;
+    $this->notificationModel->save($notification_data);
   }
 }

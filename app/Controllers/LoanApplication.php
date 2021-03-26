@@ -151,13 +151,32 @@ class LoanApplication extends BaseController {
         'applied_date' => date('Y-m-d H:i:s'),
         'attachment' => $filename
       );
-      $this->loanApplicationModel->save($loan_application_data);
+      $loan_application_id = $this->loanApplicationModel->insert($loan_application_data);
+      $this->_update_loan_guarantors($loan_application_id, $guarantor_1, $staff_id);
+      $this->_update_loan_guarantors($loan_application_id, $guarantor_2, $staff_id);
       $response_data['success'] = true;
-      $response_data['msg'] = 'You have successfully applied for a '. number_format($loan_amount, 2).' amount loan for '. $loan_duration.' months';
+      $response_data['msg'] = 'You have successfully applied for a '. number_format($loan_amount, 2).'
+       amount loan for '. $loan_duration.' months. Your chosen guarantors have been notified for their approval.';
       return $response_data;
     }
     $response_data['success'] = false;
     $response_data['msg'] = 'We did not find any details on this loan type';
     return $response_data;
+  }
+
+  private function _update_loan_guarantors($loan_application_id, $guarantor_id, $staff_id) {
+    $guarantor_data = array(
+      'loan_application_id' => $loan_application_id,
+      'guarantor_id' => $guarantor_id,
+      'staff_id' => $staff_id,
+      'confirm' => 0
+    );
+    $this->loanGuarantorModel->save($guarantor_data);
+    // notify guarantor of the loan application
+    $notification_type = 'guarantor_notification';
+    $notification_topic = 'You have been selected as a guarantor for a loan';
+    $notification_receiver_id = $guarantor_id;
+    $notification_details = $loan_application_id;
+    $this->_create_new_notification($notification_type, $notification_topic, $notification_receiver_id, $notification_details);
   }
 }
