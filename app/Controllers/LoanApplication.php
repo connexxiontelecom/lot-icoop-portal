@@ -151,9 +151,24 @@ class LoanApplication extends BaseController {
         'applied_date' => date('Y-m-d H:i:s'),
         'attachment' => $filename
       );
-      $this->loanApplicationModel->save($loan_application_data);
+      $loan_application_id = $this->loanApplicationModel->insert($loan_application_data);
+      $guarantor_1_data = array(
+        'loan_application_id' => $loan_application_id,
+        'guarantor_id' => $guarantor_1,
+        'staff_id' => $staff_id,
+        'confirm' => 0
+      );
+      $this->loanGuarantorModel->save($guarantor_1_data);
+      $guarantor_2_data = array(
+        'loan_application_id' => $loan_application_id,
+        'guarantor_id' => $guarantor_2,
+        'staff_id' => $staff_id,
+        'confirm' => 0
+      );
+      $this->loanGuarantorModel->save($guarantor_2_data);
       $response_data['success'] = true;
-      $response_data['msg'] = 'You have successfully applied for a '. number_format($loan_amount, 2).' amount loan for '. $loan_duration.' months';
+      $response_data['msg'] = 'You have successfully applied for a '. number_format($loan_amount, 2).'
+       amount loan for '. $loan_duration.' months. Your chosen guarantors have been notified for their approval.';
       return $response_data;
     }
     $response_data['success'] = false;

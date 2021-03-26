@@ -8,6 +8,7 @@ use App\Models\ContributionTypeModel;
 use App\Models\CooperatorModel;
 use App\Models\DepartmentModel;
 use App\Models\LoanApplicationModel;
+use App\Models\LoanGuarantorModel;
 use App\Models\LoanModel;
 use App\Models\LoanSetupModel;
 use App\Models\LocationModel;
@@ -49,6 +50,7 @@ class BaseController extends Controller
 	protected $cooperatorModel;
 	protected $departmentModel;
 	protected $loanApplicationModel;
+	protected $loanGuarantorModel;
 	protected $loanModel;
 	protected $loanSetupModel;
 	protected $locationModel;
@@ -81,6 +83,7 @@ class BaseController extends Controller
     $this->cooperatorModel = new CooperatorModel();
     $this->departmentModel = new DepartmentModel();
     $this->loanApplicationModel = new LoanApplicationModel();
+    $this->loanGuarantorModel = new LoanGuarantorModel();
     $this->loanModel = new LoanModel();
     $this->loanSetupModel = new LoanSetupModel();
     $this->locationModel = new LocationModel();
@@ -90,6 +93,8 @@ class BaseController extends Controller
     $this->withdrawModel = new WithdrawModel();
 	}
 
+	// calculate the difference between total credits and total debits for all payments in the regular savings type
+  // to determine the total regular savings amount
   protected function _get_regular_savings_amount($staff_id): int {
     $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
     $regular_savings_payment_details = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
