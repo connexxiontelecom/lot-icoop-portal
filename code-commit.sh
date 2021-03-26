@@ -12,14 +12,17 @@ read -r files
 echo "Nice, CJ. Let me stage $files"
 sleep 2s
 git add "$files"
-echo "Files staged. Please what is the commit message?"
+echo "Files staged. Please what is the commit message (please include quotations)?"
 read -r commit
 echo "Cool.. Let me get on that for you."
 git commit -m "$commit"
 sleep 2s
 echo "Okay I'm pushing your code now.. fingers crossed"
+sleep 2s
 git push
 sleep 2s
 echo "All done.. don't forget to push to dev for conflict resolution and then pull again to fast-forward your branch"
 sleep 2s
 echo "Perhaps you can automate PRs as well from here. Enjoy, CJ"
+sleep 2s
+git status
