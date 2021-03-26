@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\AccountClosureModel;
 use App\Models\BankModel;
 use App\Models\ContributionTypeModel;
 use App\Models\CooperatorModel;
@@ -42,6 +43,7 @@ class BaseController extends Controller
 	protected $helpers = ['form', 'url', 'date'];
 	protected $session;
 
+	protected $accountClosureModel;
 	protected $bankModel;
 	protected $contributionTypeModel;
 	protected $cooperatorModel;
@@ -73,6 +75,7 @@ class BaseController extends Controller
     // libraries
     $this->session = \CodeIgniter\Config\Services::session();
     // models
+    $this->accountClosureModel = new AccountClosureModel();
 		$this->bankModel = new BankModel();
 		$this->contributionTypeModel = new ContributionTypeModel();
     $this->cooperatorModel = new CooperatorModel();
@@ -86,4 +89,16 @@ class BaseController extends Controller
     $this->stateModel = new StateModel();
     $this->withdrawModel = new WithdrawModel();
 	}
+
+  protected function _get_regular_savings_amount($staff_id): int {
+    $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
+    $regular_savings_payment_details = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
+    $total_dr = 0;
+    $total_cr = 0;
+    foreach ($regular_savings_payment_details as $regular_savings_payment_detail) {
+      if ($regular_savings_payment_detail->pd_drcrtype == 1) $total_cr += $regular_savings_payment_detail->pd_amount;
+      if ($regular_savings_payment_detail->pd_drcrtype == 2) $total_dr += $regular_savings_payment_detail->pd_amount;
+    }
+    return $total_cr - $total_dr;
+  }
 }

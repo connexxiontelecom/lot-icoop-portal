@@ -5,7 +5,7 @@
 <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
   <div class="nk-sidebar-element nk-sidebar-head">
     <div class="nk-sidebar-brand">
-      <a href="/members-portal/dashboard" class="logo-link text-center">
+      <a href="/dashboard" class="logo-link text-center">
         <img class="logo-light logo-img" src="/assets/images/logo-01-2.png" srcset="./images/logo2x.png 2x" alt="logo">
         <img class="logo-dark logo-img" src="/assets/images/logo-01-2.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
         <span class="nio-version text-dark">Portal</span>

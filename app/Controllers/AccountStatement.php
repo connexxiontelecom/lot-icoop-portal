@@ -6,13 +6,14 @@ class AccountStatement extends BaseController {
 	function index() {
 		if ($this->session->active) {
 			$page_data['page_title'] = 'Account Statement';
-			$page_data['savings_types'] = $this->_get_savings_types();
+			$page_data['user_savings_types'] = $this->_get_savings_types();
 			return view('account-statement/index', $page_data);
 		}
 		return redirect('auth/login');
 	}
 
 	function view_account_statement() {
+	  // @TODO refactor to proper Request pattern
 		if ($this->session->active) {
 			extract($_POST);
 			$staff_id = $this->session->get('staff_id');
@@ -53,9 +54,9 @@ class AccountStatement extends BaseController {
 		$savings_types = array();
 		foreach($payment_details as $payment_detail) {
 			$savings_type = $this->contributionTypeModel->where('contribution_type_id', $payment_detail->pd_ct_id)->first();
-			array_push($savings_types, $savings_type);
+      array_push($savings_types, $savings_type);
 		}
-		return $savings_types;
+    return $savings_types;
 	}
 
 	private function _get_brought_forward($savings_type, $start_date): int {
