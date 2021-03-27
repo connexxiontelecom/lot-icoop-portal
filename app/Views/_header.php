@@ -98,15 +98,15 @@
               </div>
               <div class="dropdown-body">
                 <div class="nk-notification">
-                  <a href="#" class="nk-notification-item dropdown-inner">
-                    <div class="nk-notification-icon">
-                      <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                    </div>
-                    <div class="nk-notification-content">
-                      <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                      <div class="nk-notification-time">2 hrs ago</div>
-                    </div>
-                  </a>
+<!--                  <a href="#" class="nk-notification-item dropdown-inner">-->
+<!--                    <div class="nk-notification-icon">-->
+<!--                      <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>-->
+<!--                    </div>-->
+<!--                    <div class="nk-notification-content">-->
+<!--                      <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>-->
+<!--                      <div class="nk-notification-time">2 hrs ago</div>-->
+<!--                    </div>-->
+<!--                  </a>-->
                 </div>
               </div>
               <div class="dropdown-foot center">

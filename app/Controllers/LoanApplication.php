@@ -65,6 +65,7 @@ class LoanApplication extends BaseController {
                 if($extension == 'pdf'){
                   $filename = $file->getRandomName();
                   $file->move('uploads/loan-attachments', $filename);
+                  // @TODO send file to admin service
                 } else {
                   $response_data['success'] = false;
                   $response_data['msg'] = 'Please submit your loan attachment as a PDF';
@@ -171,12 +172,12 @@ class LoanApplication extends BaseController {
       'staff_id' => $staff_id,
       'confirm' => 0
     );
-    $this->loanGuarantorModel->save($guarantor_data);
+    $loan_guarantor_id = $this->loanGuarantorModel->insert($guarantor_data);
     // notify guarantor of the loan application
     $notification_type = 'guarantor_notification';
     $notification_topic = 'You have been selected as a guarantor for a loan';
     $notification_receiver_id = $guarantor_id;
-    $notification_details = $loan_application_id;
+    $notification_details = $loan_guarantor_id;
     $this->_create_new_notification($notification_type, $notification_topic, $notification_receiver_id, $notification_details);
   }
 }

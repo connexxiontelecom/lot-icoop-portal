@@ -1,6 +1,6 @@
 <?php
   $session = session();
-  $uri = service('uri');
+//  $uri = service('uri');
 ?>
 <div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
   <div class="nk-sidebar-element nk-sidebar-head">
@@ -180,9 +180,9 @@
             <h6 class="overline-title">Your Savings Types</h6>
 <!--            <a href="#" class="link">View All</a>-->
           </div>
-          <?php $savings_types_amounts = $session->get('savings_types_amounts'); if (!empty($savings_types_amounts)):?>
+          <?php $savings_types_amounts_list = $session->get('savings_types_amounts_list'); if (!empty($savings_types_amounts_list)):?>
             <ul class="wallet-list">
-              <?php foreach ($savings_types_amounts as $savings_type => $amount):?>
+              <?php foreach ($savings_types_amounts_list as $savings_type => $amount):?>
                 <li class="wallet-item">
                   <a href="/account-statement">
                     <div class="wallet-icon"><em class="icon ni ni-sign-kobo"></em></div>

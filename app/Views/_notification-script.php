@@ -4,7 +4,7 @@
     function loadUnseenNotifications () {
       $.ajax({
         type: 'GET',
-        url: 'get_user_notifications',
+        url: '/get-user-notifications',
         dataType: 'json',
         success: function (data) {
           if (data) {
@@ -13,7 +13,7 @@
             $.each(data, function (index, notification) {
               let notificationTime = new Date(notification.created_at).toLocaleString()
               $('.nk-notification').append(`
-                <a href="#" class="nk-notification-item dropdown-inner">
+                <a href="/notifications/view-notification/${notification.notification_id}" class="nk-notification-item dropdown-inner">
                   <div class="nk-notification-icon">
                     <em class="icon icon-circle bg-warning-dim ni ni-clipboad-check"></em>
                   </div>
