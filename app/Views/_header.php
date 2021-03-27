@@ -110,7 +110,7 @@
                 </div>
               </div>
               <div class="dropdown-foot center">
-                <a href="#">View All</a>
+                <a href="/notifications">View All</a>
               </div>
             </div>
           </li>

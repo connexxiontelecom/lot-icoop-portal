@@ -35,5 +35,58 @@
     setInterval(function () {
       loadUnseenNotifications()
     }, 5000)
+
+    $(document).on('click', '#confirm-guarantor', function(e) {
+      e.preventDefault()
+      let guarantorID = $('#loan-guarantor-id').val()
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Confirming as a guarantor is irreversible ',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm Guarantor'
+      }).then(function (result) {
+        if (result.value) {
+          $.ajax({
+            url: '<?=site_url('loan-application/confirm-guarantor')?>',
+            type: 'post',
+            data: { loan_guarantor_id: guarantorID },
+            success: function (data) {
+              if (data.success) {
+                Swal.fire('Confirmed!', data.msg, 'success').then(() => location.reload())
+              } else {
+                Swal.fire('Sorry!', data.msg, 'error')
+              }
+            }
+          })
+        }
+      })
+    })
+    $(document).on('click', '#reject-guarantor', function(e) {
+      e.preventDefault()
+      let guarantorID = $('#loan-guarantor-id').val()
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Rejecting as a guarantor is irreversible',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Reject Guarantor'
+      }).then(function (result) {
+        if (result.value) {
+          $.ajax({
+            url: '<?=site_url('loan-application/reject-guarantor')?>',
+            type: 'post',
+            data: { loan_guarantor_id: guarantorID },
+            success: function (data) {
+              if (data.success) {
+                Swal.fire('Confirmed!', data.msg, 'success').then(() => location.reload())
+              } else {
+                Swal.fire('Sorry!', data.msg, 'error')
+              }
+            }
+          })
+        }
+      })
+    })
   })
 </script>
