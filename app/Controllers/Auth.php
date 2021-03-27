@@ -40,11 +40,12 @@ class Auth extends BaseController {
 			      'savings' => $cooperator['cooperator_savings'],
 			      'status' => $cooperator['cooperator_status'],
 			      'regular_savings' => $this->_get_regular_savings_amount($cooperator['cooperator_staff_id']),
-			      'savings_types_amounts' => $this->_get_savings_types_amounts($cooperator['cooperator_staff_id']),
+			      'savings_types_amounts_list' => $this->_get_savings_types_amounts($cooperator['cooperator_staff_id']),
 			      'active' => true
 		      );
       		$this->session->set($user_data);
 		      $this->session->setFlashdata('login_success', 'You have logged in successfully!');
+//		      print_r($this->_get_savings_types_amounts($user_data['staff_id']));
 		      return redirect('dashboard');
 	      }
       } else {
