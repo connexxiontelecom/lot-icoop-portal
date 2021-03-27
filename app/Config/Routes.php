@@ -49,6 +49,8 @@ $routes->get('loan-application/get-loan-setup-details/(:any)', 'LoanApplication:
 $routes->post('loan-application/get-guarantors', 'LoanApplication::get_guarantor_cooperators');
 $routes->post('loan-application/submit-application', 'LoanApplication::submit_loan_application');
 
+$routes->get('notifications', 'Notifications::index');
+$routes->get('unread-notifications', 'Notifications::view_unread_notifications');
 $routes->get('get-user-notifications', 'Notifications::get_user_notifications');
 $routes->get('notifications/view-notification/(:num)', 'Notifications::view_notification/$1');
 

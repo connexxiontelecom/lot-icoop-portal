@@ -16,7 +16,7 @@ $session = session();
             <div class="components-preview">
               <div class="nk-block-head nk-block-head-lg wide-sm">
                 <div class="nk-block-head-content">
-                  <div class="nk-block-head-sub"><a class="back-to" href="#"><em class="icon ni ni-arrow-left"></em><span>Notifications</span></a></div>
+                  <div class="nk-block-head-sub"><a class="back-to" href="/notifications"><em class="icon ni ni-arrow-left"></em><span>Notifications</span></a></div>
                   <h2 class="nk-block-title fw-normal">View Notification</h2>
                   <div class="nk-block-des"></div>
                 </div>
@@ -30,8 +30,8 @@ $session = session();
                         Notification received
                         <em class="font-weight-bolder">
                           <?php
-                          $date = date_create($notification['created_at']);
-                          echo date_format($date, 'd M Y H:i:s a');
+                            $date = date_create($notification['created_at']);
+                            echo date_format($date, 'd M Y H:i:s a');
                           ?>
                         </em>
                       </p>
