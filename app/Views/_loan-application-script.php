@@ -228,7 +228,6 @@
               contentType: false,
               processData: false
             })
-
           }
         });
       }

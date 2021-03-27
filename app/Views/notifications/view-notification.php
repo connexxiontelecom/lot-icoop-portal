@@ -47,41 +47,48 @@ $session = session();
                             <div class="card-subtitle">
                               <p>
                                 <span class="font-weight-bolder"><?=$loan_application['name']?></span> selected you as a guarantor for their loan application.
-                                You can review the details of the loan application below and either <code>confirm</code> or <code>reject</code> as guarantor.
+                                <?php if ($loan_guarantor['confirm'] == 0):?>
+                                  You can review the details of the loan application below and either <code>confirm</code> or <code>reject</code> as guarantor.
+                                <?php elseif ($loan_guarantor['confirm'] == 1):?>
+                                  You have been <code>rejected</code> being a guarantor for the loan application below.
+                                <?php elseif ($loan_guarantor['confirm'] == 2):?>
+                                  You have been <code>confirmed</code> as guarantor for the loan application below.
+                                <?php endif;?>
                               </p>
                             </div>
                           </div>
                           <div class="nk-block mt-2">
-                          <ul class="list list-sm list-checked">
-                            <li><?=$loan_application['duration']?> Month(s) Loan Duration</li>
-                            <li><em class="icon ni ni-sign-kobo"></em> <?=number_format($loan_application['amount'], 2)?> Loan Amount</li>
-                            <li><?=$loan_details['loan_description']?></li>
-                            <li><?=$loan_details['ls_interest_rate']?>% Interest Rate</li>
-                            <li>
-                              <?php
-                                if ($loan_details['interest_method'] == 1) echo 'Upfront Interest Method';
-                                elseif ($loan_details['interest_method'] == 2) echo 'Reducing Balance Interest Method';
-                                elseif ($loan_details['interest_method'] == 3) echo 'Targeted Interest Method';
-                              ?>
-                            </li>
-                            <li>
-                              <?php
-                                if ($loan_details['interest_charge_type'] == 1) echo 'Flat Interest Charge';
-                                elseif ($loan_details['interest_charge_type'] == 2) echo 'Monthly Interest Charge';
-                                elseif ($loan_details['interest_charge_type'] == 3) echo 'Yearly Interest Charge';
-                              ?>
-                            </li>
-                            <li>
-                              Applied on
-                              <?php
-                                $date = date_create($loan_application['applied_date']);
-                                echo date_format($date, 'd M Y');
-                              ?>
-                            </li>
-                          </ul>
-                          <button class="btn btn-primary" type="button">Confirm</button>
-                          <button class="btn btn-outline-danger" type="button">Reject</button>
-                        </div>
+                            <ul class="list list-sm list-checked">
+                              <li><?=$loan_application['duration']?> Month(s) Loan Duration</li>
+                              <li><em class="icon ni ni-sign-kobo"></em> <?=number_format($loan_application['amount'], 2)?> Loan Amount</li>
+                              <li><?=$loan_details['loan_description']?></li>
+                              <li><?=$loan_details['ls_interest_rate']?>% Interest Rate</li>
+                              <li>
+                                <?php
+                                  if ($loan_details['interest_method'] == 1) echo 'Upfront Interest Method';
+                                  elseif ($loan_details['interest_method'] == 2) echo 'Reducing Balance Interest Method';
+                                  elseif ($loan_details['interest_method'] == 3) echo 'Targeted Interest Method';
+                                ?>
+                              </li>
+                              <li>
+                                <?php
+                                  if ($loan_details['interest_charge_type'] == 1) echo 'Flat Interest Charge';
+                                  elseif ($loan_details['interest_charge_type'] == 2) echo 'Monthly Interest Charge';
+                                  elseif ($loan_details['interest_charge_type'] == 3) echo 'Yearly Interest Charge';
+                                ?>
+                              </li>
+                              <li>
+                                Applied on
+                                <?php
+                                  $date = date_create($loan_application['applied_date']);
+                                  echo date_format($date, 'd M Y');
+                                ?>
+                              </li>
+                            </ul>
+                            <input type="text" value="<?=$loan_guarantor['loan_guarantor_id']?>" id="loan-guarantor-id" hidden>
+                            <button id="confirm-guarantor" class="btn btn-primary" type="button" <?=$loan_guarantor['confirm'] != 0 ? 'disabled' : '' ?>>Confirm</button>
+                            <button id="reject-guarantor" class="btn btn-outline-danger" type="button" <?=$loan_guarantor['confirm'] != 0 ? 'disabled' : '' ?>>Reject</button>
+                          </div>
                         <?php endif;?>
                       </div>
                     </div>
