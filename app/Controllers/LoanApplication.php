@@ -91,6 +91,76 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
+  function confirm_guarantor() {
+    if ($this->session->active) {
+      $post_data = $this->request->getPost();
+      if ($post_data) {
+        $response_data = array();
+        $loan_guarantor_id = $post_data['loan_guarantor_id'];
+        $loan_guarantor = $this->loanGuarantorModel->find($loan_guarantor_id);
+        if ($loan_guarantor) {
+          if ($loan_guarantor['confirm'] == 0) {
+            $loan_guarantor_data = [ 'loan_guarantor_id' => $loan_guarantor_id, 'confirm' => 2 ];
+            $confirmed = $this->loanGuarantorModel->save($loan_guarantor_data);
+            if ($confirmed) {
+              $response_data['success'] = true;
+              $response_data['msg'] = 'You have been confirmed as a guarantor';
+              return $this->response->setJSON($response_data);
+            } else {
+              $response_data['success'] = false;
+              $response_data['msg'] = 'You could not be confirmed as a guarantor';
+              return $this->response->setJSON($response_data);
+            }
+          } else {
+            $response_data['success'] = false;
+            $response_data['msg'] = 'You have already responded as a guarantor';
+            return $this->response->setJSON($response_data);
+          }
+        } else {
+          $response_data['success'] = false;
+          $response_data['msg'] = 'We could not find any data for this loan guarantor';
+          return $this->response->setJSON($response_data);
+        }
+      }
+    }
+    return redirect('auth/login');
+  }
+
+  function reject_guarantor() {
+    if ($this->session->active) {
+      $post_data = $this->request->getPost();
+      if ($post_data) {
+        $response_data = array();
+        $loan_guarantor_id = $post_data['loan_guarantor_id'];
+        $loan_guarantor = $this->loanGuarantorModel->find($loan_guarantor_id);
+        if ($loan_guarantor) {
+          if ($loan_guarantor['confirm'] == 0) {
+            $loan_guarantor_data = [ 'loan_guarantor_id' => $loan_guarantor_id, 'confirm' => 1 ];
+            $rejected = $this->loanGuarantorModel->save($loan_guarantor_data);
+            if ($rejected) {
+              $response_data['success'] = true;
+              $response_data['msg'] = 'You have rejected being a guarantor';
+              return $this->response->setJSON($response_data);
+            } else {
+              $response_data['success'] = false;
+              $response_data['msg'] = 'You could not reject being a guarantor';
+              return $this->response->setJSON($response_data);
+            }
+          } else {
+            $response_data['success'] = false;
+            $response_data['msg'] = 'You have already responded as a guarantor';
+            return $this->response->setJSON($response_data);
+          }
+        } else {
+          $response_data['success'] = false;
+          $response_data['msg'] = 'We could not find any data for this loan guarantor';
+          return $this->response->setJSON($response_data);
+        }
+      }
+    }
+    return redirect('auth/login');
+  }
+
   private function _submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename): array {
     $staff_id = $this->session->get('staff_id');
     $firstname = $this->session->get('firstname');

@@ -3,6 +3,28 @@ namespace App\Controllers;
 
 class Notifications extends BaseController {
 
+  function index() {
+    if ($this->session->active) {
+      $staff_id = $this->session->get('staff_id');
+      $page_data['page_title'] = 'Notifications';
+      $page_data['notifications'] = $this->notificationModel->where('receiver_id', $staff_id)->findAll();
+      $page_data['unseen_count'] = sizeof($this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll());
+      return view('notifications/index-all', $page_data);
+    }
+    return redirect('auth/login');
+  }
+
+  function view_unread_notifications() {
+    if ($this->session->active) {
+      $staff_id = $this->session->get('staff_id');
+      $page_data['page_title'] = 'Unread Notifications';
+      $page_data['notifications'] = $this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll();
+      $page_data['unseen_count'] = sizeof($this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll());
+      return view('notifications/index-unread', $page_data);
+    }
+    return redirect('auth/login');
+  }
+
   function get_user_notifications() {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
