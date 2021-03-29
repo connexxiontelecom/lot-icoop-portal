@@ -50,7 +50,7 @@ $session = session();
                                 <?php if ($loan_guarantor['confirm'] == 0):?>
                                   You can review the details of the loan application below and either <code>confirm</code> or <code>reject</code> as guarantor.
                                 <?php elseif ($loan_guarantor['confirm'] == 1):?>
-                                  You have been <code>rejected</code> being a guarantor for the loan application below.
+                                  You have <code>rejected</code> being a guarantor for the loan application below.
                                 <?php elseif ($loan_guarantor['confirm'] == 2):?>
                                   You have been <code>confirmed</code> as guarantor for the loan application below.
                                 <?php endif;?>
