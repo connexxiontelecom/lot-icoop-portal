@@ -14,7 +14,7 @@ class Notifications extends BaseController {
     return redirect('auth/login');
   }
 
-  function view_unread_notifications() {
+  function unread_notifications() {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
       $page_data['page_title'] = 'Unread Notifications';
@@ -28,7 +28,7 @@ class Notifications extends BaseController {
   function get_user_notifications() {
     if ($this->session->active) {
       $staff_id = $this->session->get('staff_id');
-      $user_notifications = $this->notificationModel->where('receiver_id', $staff_id)->findAll();
+      $user_notifications = $this->notificationModel->where(['receiver_id' => $staff_id, 'seen' => 0])->findAll();
       return $this->response->setJSON($user_notifications);
     }
     return redirect('auth/login');
@@ -38,6 +38,11 @@ class Notifications extends BaseController {
     if ($this->session->active) {
       $notification = $this->notificationModel->find($notification_id);
       if ($notification) {
+        if ($notification['seen'] == 0) {
+          $notification_data = [ 'notification_id' => $notification['notification_id'], 'seen' => 1];
+          $this->notificationModel->save($notification_data);
+          $notification = $this->notificationModel->find($notification_id);
+        }
         $page_data['page_title'] = 'View Notification';
         $page_data['notification'] = $notification;
         switch ($notification['type']) {
