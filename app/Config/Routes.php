@@ -4,6 +4,7 @@ namespace Config;
 
 // Create a new instance of our RouteCollection class.
 use App\Controllers\LoanApplication;
+use App\Controllers\Notifications;
 
 $routes = Services::routes();
 
@@ -52,7 +53,7 @@ $routes->post('loan-application/confirm-guarantor', 'LoanApplication::confirm_gu
 $routes->post('loan-application/reject-guarantor', 'LoanApplication::reject_guarantor');
 
 $routes->get('notifications', 'Notifications::index');
-$routes->get('unread-notifications', 'Notifications::view_unread_notifications');
+$routes->get('unread-notifications', 'Notifications::unread_notifications');
 $routes->get('get-user-notifications', 'Notifications::get_user_notifications');
 $routes->get('notifications/view-notification/(:num)', 'Notifications::view_notification/$1');
 

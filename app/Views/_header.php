@@ -14,13 +14,6 @@
           <span class="nio-version text-dark">Portal</span>
         </a>
       </div>
-      <!--			<div class="nk-header-brand d-xl-none">-->
-      <!--				<a href="html/crypto/index.html" class="logo-link">-->
-      <!--					<img class="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">-->
-      <!--					<img class="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">-->
-      <!--					<span class="nio-version">Crypto</span>-->
-      <!--				</a>-->
-      <!--			</div>-->
       <div class="nk-header-news d-none d-xl-block">
         <div class="nk-news-list">
           <a class="nk-news-item" href="javascript:void(0)" target="_blank">
@@ -89,24 +82,13 @@
           <li class="dropdown notification-dropdown mr-n1">
             <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
               <div id="notification-icon" class="icon-status"><em class="icon ni ni-bell"></em></div>
-<!--              <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>-->
             </a>
             <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
               <div class="dropdown-head">
-                <span class="sub-title nk-dropdown-title">Notifications</span>
-                <a href="#">Mark All as Read</a>
+                <span class="sub-title nk-dropdown-title font-weight-bolder">Notifications</span>
               </div>
               <div class="dropdown-body">
                 <div class="nk-notification">
-<!--                  <a href="#" class="nk-notification-item dropdown-inner">-->
-<!--                    <div class="nk-notification-icon">-->
-<!--                      <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>-->
-<!--                    </div>-->
-<!--                    <div class="nk-notification-content">-->
-<!--                      <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>-->
-<!--                      <div class="nk-notification-time">2 hrs ago</div>-->
-<!--                    </div>-->
-<!--                  </a>-->
                 </div>
               </div>
               <div class="dropdown-foot center">

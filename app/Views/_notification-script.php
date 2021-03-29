@@ -8,11 +8,12 @@
         dataType: 'json',
         success: function (data) {
           if (data) {
-            $('#notification-icon').addClass('icon-status-success')
             $('.nk-notification').empty()
-            $.each(data, function (index, notification) {
-              let notificationTime = new Date(notification.created_at).toLocaleString()
-              $('.nk-notification').append(`
+            if (data.length) {
+              $('#notification-icon').addClass('icon-status-success')
+              $.each(data, function (index, notification) {
+                let notificationTime = new Date(notification.created_at).toLocaleString()
+                $('.nk-notification').append(`
                 <a href="/notifications/view-notification/${notification.notification_id}" class="nk-notification-item dropdown-inner">
                   <div class="nk-notification-icon">
                     <em class="icon icon-circle bg-warning-dim ni ni-clipboad-check"></em>
@@ -23,10 +24,17 @@
                   </div>
                 </a>
               `)
-            })
-
-          } else {
-            $('#notification-icon').removeClass('icon-status-success')
+              })
+            } else {
+              $('#notification-icon').removeClass('icon-status-success')
+              $('.nk-notification').append(`
+                <div class="nk-notification-item dropdown-inner text-center">
+                  <div class="nk-notification-content">
+                    <div class="nk-notification-text">No Unread Notifications</div>
+                  </div>
+                </div>
+              `)
+            }
           }
         }
       })
