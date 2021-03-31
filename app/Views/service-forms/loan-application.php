@@ -123,6 +123,11 @@ $session = session();
                           <em class="icon ni ni-alert-circle"></em> Please select a loan type to get started.
                         </div>
                         <!--@TODO display loan setup details here-->
+                        <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="loan-details" hidden>
+                          <em class="icon ni ni-alert-circle"></em> These are the details for your selected loan
+                          <ul class="list list-sm list-checked" id="loan-details-list">
+                          </ul>
+                        </div>
                         <!--qualification age-->
                         <div class="alert alert-icon alert-success mt-1 mb-1" role="alert" id="qualification-age-passed" hidden>
                           <em class="icon ni ni-check-circle"></em> You have been a member long enough to qualify for this loan.

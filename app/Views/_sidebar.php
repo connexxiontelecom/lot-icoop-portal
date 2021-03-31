@@ -39,7 +39,7 @@
           <div class="user-account-actions">
             <ul class="g-3">
               <li><a href="/loan-application" class="btn btn-lg btn-primary"><span>Loan</span></a></li>
-              <li><a href="#" class="btn btn-lg btn-warning"><span>Withdraw</span></a></li>
+              <li><a href="/withdrawal-application" class="btn btn-lg btn-warning"><span>Withdraw</span></a></li>
             </ul>
           </div>
         </div><!-- .nk-sidebar-widget -->
@@ -92,7 +92,7 @@
 <!--              </li>-->
             </ul>
             <ul class="user-account-links">
-              <li><a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a></li>
+              <li><a href="/withdrawal-application" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a></li>
               <li><a href="/loan-application" class="link"><span>Loan Funds</span> <em class="icon ni ni-wallet-in"></em></a></li>
             </ul>
             <ul class="link-list">
@@ -145,7 +145,7 @@
                   <a href="/loan-application" class="nk-menu-link"><span class="nk-menu-text">Loan Application</span></a>
                 </li>
                 <li class="nk-menu-item">
-                  <a href="#" class="nk-menu-link"><span class="nk-menu-text">Withdrawal Application</span></a>
+                  <a href="/withdrawal-application" class="nk-menu-link"><span class="nk-menu-text">Withdrawal Application</span></a>
                 </li>
                 <li class="nk-menu-item">
                   <a href="#" class="nk-menu-link"><span class="nk-menu-text">Savings Variation</span></a>

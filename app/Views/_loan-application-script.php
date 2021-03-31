@@ -10,6 +10,9 @@
   let loanAgeQualification = 0
   let loanPSR = 0
   let loanPSRValue = 0
+  let loanInterestRate = 0
+  let loanInterestMethod = ''
+  let loanInterestChargeType = ''
   let userApprovedDate = moment('<?= $session->get('approved_date')?>')
   let savingsAmount = '<?= $session->get('regular_savings')?>'
   let today = moment()
@@ -32,6 +35,21 @@
             loanAgeQualification = loanSetupDetails.age_qualification
             loanPSR = loanSetupDetails.psr
             loanPSRValue = loanSetupDetails.psr_value
+            loanInterestRate = loanSetupDetails.ls_interest_rate
+            if (loanSetupDetails.interest_method == 1) loanInterestMethod = 'Upfront'
+            else if (loanSetupDetails.interest_method == 2) loanInterestMethod = 'Reducing Balance'
+            else if (loanSetupDetails.interest_method == 3) loanInterestMethod = 'Targeted'
+
+            if (loanSetupDetails.interest_charge_type == 1) loanInterestChargeType = 'Flat'
+            else if (loanSetupDetails.interest_charge_type == 2) loanInterestChargeType = 'Monthly'
+            else if (loanSetupDetails.interest_charge_type == 3) loanInterestChargeType = 'Yearly'
+
+
+            $('#loan-details-list').html(`
+              <li>${loanInterestRate}% Interest Rate</li>
+              <li>${loanInterestMethod} Interest Method</li>
+              <li>${loanInterestChargeType} Interest Charge Type</li>
+            `)
             $('#loan-type-note').html(`Loan Qualification Period <span class="text-primary">${loanAgeQualification} month(s)</span>`)
             $('#loan-duration-note').html(`Maximum Repayment Period <span class="text-primary">${loanDuration} month(s)</span>`)
             $('#loan-amount-note').html(`
@@ -42,6 +60,7 @@
               Loan PSR <span class="text-primary">${loanPSRValue} % </span>
             `)
             $('#get-started').attr('hidden', true)
+            $('#loan-details').attr('hidden', false)
             if (monthsDifference > loanAgeQualification) {
               // The user has been approved long enough to qualify for the loan type
               $('#qualification-age-passed').attr('hidden', false)
@@ -73,6 +92,7 @@
         $('#loan-type-note').html(``)
         $('#loan-duration-note').html(``)
         $('#loan-amount-note').html(``)
+        $('#loan-details-list').html(``)
         $('#get-started').attr('hidden', false)
         $('#loan-duration').attr('disabled', true)
         $('#loan-amount').attr('disabled', true)
@@ -91,6 +111,7 @@
         $('#guarantor-2').val('')
         $('#guarantor-1').attr('disabled', true)
         $('#guarantor-2').attr('disabled', true)
+        $('#loan-details').attr('hidden', true)
       }
     })
 
