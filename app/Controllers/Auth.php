@@ -62,19 +62,8 @@ class Auth extends BaseController {
   	return redirect('auth/login');
   }
 
-  private function _get_savings_types(): array {
-    $staff_id = $this->session->get('staff_id');
-    $payment_details = $this->paymentDetailModel->get_payment_details_by_staff_id($staff_id);
-    $savings_types = array();
-    foreach($payment_details as $payment_detail) {
-      $savings_type = $this->contributionTypeModel->where('contribution_type_id', $payment_detail->pd_ct_id)->first();
-      array_push($savings_types, $savings_type);
-    }
-    return $savings_types;
-  }
-
   private function _get_savings_types_amounts($staff_id): array {
-    $savings_types = $this->_get_savings_types();
+    $savings_types = $this->_get_savings_types($staff_id);
     $savings_types_amounts = array();
     foreach ($savings_types as $savings_type) {
       $total_dr = 0;

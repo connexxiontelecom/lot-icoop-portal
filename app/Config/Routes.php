@@ -3,9 +3,6 @@
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
-use App\Controllers\LoanApplication;
-use App\Controllers\Notifications;
-
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
@@ -51,6 +48,8 @@ $routes->post('loan-application/get-guarantors', 'LoanApplication::get_guarantor
 $routes->post('loan-application/submit-application', 'LoanApplication::submit_loan_application');
 $routes->post('loan-application/confirm-guarantor', 'LoanApplication::confirm_guarantor');
 $routes->post('loan-application/reject-guarantor', 'LoanApplication::reject_guarantor');
+
+$routes->get('withdrawal-application', 'WithdrawalApplication::index');
 
 $routes->get('notifications', 'Notifications::index');
 $routes->get('unread-notifications', 'Notifications::unread_notifications');
