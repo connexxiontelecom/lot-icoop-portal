@@ -6,13 +6,13 @@ class FinishedLoans extends BaseController {
   function index() {
     if ($this->session->active) {
       $page_data['page_title'] = 'Finished Loans';
-      $page_data['finished_loans'] = $this->__get_finished_loans();
+      $page_data['finished_loans'] = $this->_get_finished_loans();
       return view('finished-loans/index', $page_data);
     }
     return redirect('auth/login');
   }
 
-  private function __get_finished_loans(): array {
+  private function _get_finished_loans(): array {
     $staff_id = $this->session->get('staff_id');
     $cooperator_loans = $this->loanModel->where('staff_id', $staff_id)->findAll();
     $finished_loans = array();

@@ -111,6 +111,16 @@ class BaseController extends Controller
     return $total_cr - $total_dr;
   }
 
+  protected function _get_savings_types($staff_id): array {
+    $payment_details = $this->paymentDetailModel->get_payment_details_by_staff_id($staff_id);
+    $savings_types = array();
+    foreach($payment_details as $payment_detail) {
+      $savings_type = $this->contributionTypeModel->where('contribution_type_id', $payment_detail->pd_ct_id)->first();
+      array_push($savings_types, $savings_type);
+    }
+    return $savings_types;
+  }
+
   protected function _create_new_notification($type, $topic, $receiver_id, $details) {
 	  $notification_data = array();
     $notification_data['type'] = $type;
@@ -119,4 +129,6 @@ class BaseController extends Controller
     $notification_data['details'] = $details;
     $this->notificationModel->save($notification_data);
   }
+
+  
 }

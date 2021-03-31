@@ -26,8 +26,8 @@
                   </div><!-- .nk-block-head-content -->
                   <div class="nk-block-head-content">
                     <ul class="nk-block-tools gx-3">
-                      <li><a href="#" class="btn btn-primary"><span>New Withdrawal</span> <em class="icon ni ni-arrow-long-right"></em></a></li>
-                      <li><a href="#" class="btn btn-white btn-light"><span>New Loan</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
+                      <li><a href="/withdrawal-application" class="btn btn-primary"><span>New Withdrawal</span> <em class="icon ni ni-arrow-long-right"></em></a></li>
+                      <li><a href="/loan-application" class="btn btn-white btn-light"><span>New Loan</span> <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a></li>
                     </ul>
                   </div><!-- .nk-block-head-content -->
                 </div><!-- .nk-block-between -->
