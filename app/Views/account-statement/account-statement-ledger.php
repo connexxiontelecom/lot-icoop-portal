@@ -1,6 +1,7 @@
 <?php
   $session = session();
-  $balance = $brought_forward; $total_dr = 0; $total_cr = 0;
+  isset($brought_forward) ? $balance = $brought_forward : $balance = 0;
+  $total_dr = 0; $total_cr = 0;
   foreach ($payment_details as $payment_detail) {
 	  if ($payment_detail->pd_drcrtype == 2){
 		  $balance -= $payment_detail->pd_amount;
@@ -42,17 +43,25 @@
                         This is the periodic summary of your account activity starting from
                         <span class="font-weight-bolder">
                           <?php
-                            $start_date = DateTime::createFromFormat('Y-m-d', $start_date);
-                            $start_date = $start_date->format('d M Y');
-                            echo $start_date;
+                            if (isset($start_date)) {
+                              $start_date = DateTime::createFromFormat('Y-m-d', $start_date);
+                              $start_date = $start_date->format('d M Y');
+                              echo $start_date;
+                            } else {
+                              echo "beginning of time";
+                            }
                           ?>
                         </span>
                         and ending at
                         <span class="font-weight-bolder">
                           <?php
-                            $end_date = DateTime::createFromFormat('Y-m-d', $end_date);
-                            $end_date = $end_date->format('d M Y');
-                            echo $end_date;
+                            if (isset($end_date)) {
+                              $end_date = DateTime::createFromFormat('Y-m-d', $end_date);
+                              $end_date = $end_date->format('d M Y');
+                              echo $end_date;
+                            } else {
+                              echo "today";
+                            }
                           ?>
                         </span>
 	                      .
@@ -61,25 +70,27 @@
                   </div>
                 </div>
                 <div class="row mb-3 gy-3">
-                  <div class="col-md-3">
-                    <div class="card card-bordered card-full">
-                      <div class="card-inner">
-                        <div class="card-title-group align-start mb-0">
-                          <div class="card-title">
-                            <h6 class="subtitle">BF</h6>
+                  <?php if (isset($brought_forward)):?>
+                    <div class="col-md-3">
+                      <div class="card card-bordered card-full">
+                        <div class="card-inner">
+                          <div class="card-title-group align-start mb-0">
+                            <div class="card-title">
+                              <h6 class="subtitle">BF</h6>
+                            </div>
+                            <div class="card-tools">
+                              <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Brought Forward"></em>
+                            </div>
                           </div>
-                          <div class="card-tools">
-                            <em class="card-hint icon ni ni-help-fill" data-toggle="tooltip" data-placement="left" title="Brought Forward"></em>
+                          <div class="card-amount">
+                            <span class="amount">
+                              <?= number_format($brought_forward, 2, '.', ',');?>
+                            </span>
                           </div>
                         </div>
-                        <div class="card-amount">
-                          <span class="amount">
-                            <?= number_format($brought_forward, 2, '.', ',');?>
-                          </span>
-                        </div>
-                      </div>
-                    </div><!-- .card -->
-                  </div><!-- .col -->
+                      </div><!-- .card -->
+                    </div><!-- .col -->
+                  <?php endif; ?>
                   <div class="col-md-3">
                     <div class="card card-bordered card-full">
                       <div class="card-inner">
@@ -152,15 +163,17 @@
                       </tr>
                       </thead>
                       <tbody>
-                        <tr class="font-weight-bolder">
-                          <td><?=$sn++?></td>
-                          <td>-</td>
-                          <td>BF</td>
-                          <td class="text-right text-danger"><?=number_format(0,2)?></td>
-                          <td class="text-right text-success"><?=number_format($brought_forward, 2)?></td>
-                          <td class="text-right"><?=number_format($brought_forward, 2)?></td>
-                        </tr>
-                        <?php if (!empty($payment_details)): $balance = $brought_forward; $total_dr = 0; $total_cr = 0; foreach ($payment_details as $payment_detail): ?>
+                        <?php if (isset($brought_forward)): ?>
+                          <tr class="font-weight-bolder">
+                            <td><?=$sn++?></td>
+                            <td>-</td>
+                            <td>BF</td>
+                            <td class="text-right text-danger"><?=number_format(0,2)?></td>
+                            <td class="text-right text-success"><?=number_format($brought_forward, 2)?></td>
+                            <td class="text-right"><?=number_format($brought_forward, 2)?></td>
+                          </tr>
+                        <?php endif; ?>
+                        <?php if (!empty($payment_details)): isset($brought_forward) ? $balance = $brought_forward : $balance = 0; $total_dr = 0; $total_cr = 0; foreach ($payment_details as $payment_detail): ?>
                           <tr>
                             <td><?=$sn?></td>
                             <td>
@@ -179,6 +192,8 @@
                                   echo number_format($payment_detail->pd_amount, 2, '.', ',');
                                   $balance -= $payment_detail->pd_amount;
                                   $total_dr += $payment_detail->pd_amount;
+                                } else {
+                                  echo number_format(0, 2);
                                 }
                               ?>
                             </td>
@@ -188,7 +203,9 @@
 		                            echo number_format($payment_detail->pd_amount, 2, '.', ',');
 		                            $balance += $payment_detail->pd_amount;
 		                            $total_cr += $payment_detail->pd_amount;
-	                            }
+	                            } else {
+	                              echo number_format(0, 2);
+                              }
 	                            ?>
                             </td>
                             <td class="text-right">
@@ -200,8 +217,13 @@
                           <td class="font-weight-bolder"><?=$sn?></td>
                           <td class="font-weight-bolder">
 	                          <?php
-                              $date = date_create($end_date);
-                              echo date_format($date, 'd M Y')
+                              if (isset($end_date)) {
+                                $date = date_create($end_date);
+                                echo date_format($date, 'd M Y');
+                              } else {
+                                $date = date_create();
+                                echo date_format($date, 'd M Y');
+                              }
 	                          ?>
                           </td>
                           <td class="font-weight-bolder">

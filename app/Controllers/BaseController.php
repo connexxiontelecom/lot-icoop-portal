@@ -14,6 +14,7 @@ use App\Models\LocationModel;
 use App\Models\NotificationModel;
 use App\Models\PaymentDetailModel;
 use App\Models\PayrollGroupModel;
+use App\Models\PolicyConfigModel;
 use App\Models\StateModel;
 use App\Models\WithdrawModel;
 
@@ -59,6 +60,7 @@ class BaseController extends Controller
 	protected $notificationModel;
 	protected $paymentDetailModel;
 	protected $payrollGroupModel;
+	protected $policyConfigModel;
 	protected $stateModel;
 	protected $withdrawModel;
 
@@ -93,6 +95,7 @@ class BaseController extends Controller
     $this->notificationModel = new NotificationModel();
     $this->paymentDetailModel = new PaymentDetailModel();
     $this->payrollGroupModel = new PayrollGroupModel();
+    $this->policyConfigModel =new PolicyConfigModel();
     $this->stateModel = new StateModel();
     $this->withdrawModel = new WithdrawModel();
 	}
@@ -101,7 +104,7 @@ class BaseController extends Controller
   // to determine the total regular savings amount
   protected function _get_regular_savings_amount($staff_id): int {
     $regular_savings_contribution_type = $this->contributionTypeModel->where('contribution_type_regular', 1)->first();
-    $regular_savings_payment_details = $this->paymentDetailModel->get_savings_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
+    $regular_savings_payment_details = $this->paymentDetailModel->get_all_payment_details_by_id($staff_id, $regular_savings_contribution_type['contribution_type_id']);
     $total_dr = 0;
     $total_cr = 0;
     foreach ($regular_savings_payment_details as $regular_savings_payment_detail) {
