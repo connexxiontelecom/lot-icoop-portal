@@ -25,6 +25,13 @@ class PaymentDetailModel extends Model {
 		return $this->query_builder->get()->getResult();
 	}
 
+  public function get_all_payment_details_by_id($staff_id, $savings_id): array {
+    $this->query_builder->where('pd_staff_id', $staff_id);
+    $this->query_builder->where('pd_ct_id', $savings_id);
+    return $this->query_builder->get()->getResult();
+  }
+
+
 	public function get_payment_details_by_date_range($staff_id, $savings_type, $start_date, $end_date): array {
 		$this->query_builder->where('pd_staff_id', $staff_id);
 		$this->query_builder->where('pd_ct_id', $savings_type);
@@ -37,12 +44,6 @@ class PaymentDetailModel extends Model {
     $this->query_builder->where('pd_staff_id', $staff_id);
     $this->query_builder->where('pd_ct_id', $savings_type);
     $this->query_builder->where('pd_transaction_date <', $start_date);
-    return $this->query_builder->get()->getResult();
-  }
-
-  public function get_savings_payment_details_by_id($staff_id, $savings_id): array {
-    $this->query_builder->where('pd_staff_id', $staff_id);
-    $this->query_builder->where('pd_ct_id', $savings_id);
     return $this->query_builder->get()->getResult();
   }
 

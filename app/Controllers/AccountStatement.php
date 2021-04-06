@@ -16,36 +16,43 @@ class AccountStatement extends BaseController {
 	function view_account_statement() {
 	  // @TODO refactor to proper Request pattern
 		if ($this->session->active) {
-			extract($_POST);
-			$staff_id = $this->session->get('staff_id');
-			if (\DateTime::createFromFormat('m/d/Y', $start_date)) {
-				$start_date = $this->_convert_date_to_Ymd($start_date);
-			}
-			if (\DateTime::createFromFormat('m/d/Y', $end_date)) {
-				$end_date = $this->_convert_date_to_Ymd($end_date);
-			}
-			if ($savings_type && $start_date && $end_date) {
-				if ($savings_type != 'default') {
-					$payment_details = $this->paymentDetailModel->get_payment_details_by_date_range($staff_id, $savings_type, $start_date, $end_date);
-					if (!empty($payment_details)) {
-						$page_data['page_title'] = 'View Account Statement';
-						$page_data['payment_details'] = $payment_details;
-						$page_data['savings_type_ledger'] = $this->contributionTypeModel->where('contribution_type_id', $savings_type)->first();
-						$page_data['start_date'] = $start_date;
-						$page_data['end_date'] = $end_date;
-						$page_data['brought_forward'] = $this->_get_brought_forward($savings_type, $start_date);
-						return view('account-statement/account-statement-ledger', $page_data);
-					} else {
-						$this->session->setFlashdata('no_payment_details', 'We could not find an activity for your criteria!');
-					}
-				} else {
-					$this->session->setFlashdata('no_payment_details', 'Please select a valid Savings Type!');
-				}
-			} else {
-				$this->session->setFlashdata('no_payment_details', 'Please select a valid Savings Type or Transaction Date Range!');
-			}
-			return redirect('account-statement');
-		}
+		  $post_data = $this->request->getPost();
+		  if ($post_data) {
+        $staff_id = $this->session->get('staff_id');
+        $payment_details = array();
+        $savings_type = $post_data['savings_type'];
+        isset($post_data['start_date']) ? $start_date = $post_data['start_date'] : $start_date = 0;
+        isset($post_data['end_date']) ? $end_date = $post_data['end_date'] : $end_date = 0;
+        isset($post_data['view_all']) ? $view_all = $post_data['view_all'] : $view_all = 0;
+        if (\DateTime::createFromFormat('m/d/Y', $start_date)) {
+          $start_date = $this->_convert_date_to_Ymd($start_date);
+        }
+        if (\DateTime::createFromFormat('m/d/Y', $end_date)) {
+          $end_date = $this->_convert_date_to_Ymd($end_date);
+        }
+        if ($savings_type && $savings_type != 'default') {
+          if ($view_all) {
+            $payment_details = $this->paymentDetailModel->get_all_payment_details_by_id($staff_id, $savings_type);
+          } elseif ($start_date && $end_date) {
+            $payment_details = $this->paymentDetailModel->get_payment_details_by_date_range($staff_id, $savings_type, $start_date, $end_date);
+            $page_data['brought_forward'] = $this->_get_brought_forward($savings_type, $start_date);
+            $page_data['start_date'] = $start_date;
+            $page_data['end_date'] = $end_date;
+          } else {
+            $this->session->setFlashdata('no_payment_details', 'Please select a valid Savings Type or Transaction Date Range!');
+            return redirect('account-statement');
+          }
+          $page_data['page_title'] = 'View Account Statement';
+          $page_data['payment_details'] = $payment_details;
+          $page_data['savings_type_ledger'] = $this->contributionTypeModel->where('contribution_type_id', $savings_type)->first();
+          return view('account-statement/account-statement-ledger', $page_data);
+        } else {
+          $this->session->setFlashdata('no_payment_details', 'Please select a valid Savings Type!');
+          return redirect('account-statement');
+        }
+      }
+      return redirect('account-statement');
+    }
 		return redirect('auth/login');
 	}
 

@@ -72,6 +72,12 @@
                                     </div>
                                   </div>
                                   <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="view-all" name="view_all" value="1">
+                                      <label class="custom-control-label" for="view-all">Click to view all account activities</label>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Generate Statement</button>
                                     <button id="toast-btn" type="button" hidden class="no-payment-details"></button>
                                   </div>
@@ -92,6 +98,7 @@
       </div>
     </div>
     <?php include(APPPATH.'/Views/_scripts.php'); ?>
+    <?php include(APPPATH.'/Views/_account-statement-script.php'); ?>
     <?php if($session->getFlashdata('no_payment_details')):?>
       <script>
         $(document).ready(function () {
