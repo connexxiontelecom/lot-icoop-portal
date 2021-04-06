@@ -12,4 +12,16 @@ class WithdrawalApplication extends BaseController {
     }
     return redirect('auth/login');
   }
+
+  public function compute_balance() {
+    $staff_id = $this->session->get('staff_id');
+    $status = $this->session->get('status');
+    $policy_config = $this->policyConfigModel->first();
+    $post_data = $this->request->getPost();
+    if ($post_data) {
+      if ($status == 2) {
+
+      }
+    }
+  }
 }
