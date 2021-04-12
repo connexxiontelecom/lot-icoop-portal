@@ -38,9 +38,9 @@ class WithdrawalApplication extends BaseController {
       }
       $response_data = [
         'success' => true,
-        'savings_balance' => $savings_amount,
-        'withdrawal_balance' => $withdrawal_amount - $encumbrance_amount,
-        'encumbered_amount' => $encumbrance_amount
+        'savings_balance' => number_format($savings_amount, 2),
+        'withdrawal_balance' => number_format($withdrawal_amount - $encumbrance_amount, 2),
+        'encumbered_amount' => number_format($encumbrance_amount, 2)
       ];
       return $this->response->setJSON($response_data);
     }

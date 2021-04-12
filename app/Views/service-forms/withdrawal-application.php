@@ -66,6 +66,10 @@ $session = session();
                         <div class="alert alert-icon alert-info mt-1 mb-1" role="alert" id="get-started">
                           <em class="icon ni ni-alert-circle"></em> Please select a savings type to get started.
                         </div>
+                        <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="withdraw-details" hidden>
+                          <em class="icon ni ni-alert-circle"></em> These are the details for your savings account
+                          <ul class="list list-sm list-checked" id="savings-details-list"></ul>
+                        </div>
                       </div>
                     </div>
                   </div>
