@@ -50,7 +50,7 @@ $routes->post('loan-application/confirm-guarantor', 'LoanApplication::confirm_gu
 $routes->post('loan-application/reject-guarantor', 'LoanApplication::reject_guarantor');
 
 $routes->get('withdrawal-application', 'WithdrawalApplication::index');
-$routes->post('compute-balance', 'WithdrawalApplication::compute_balance');
+$routes->get('withdrawal-application/compute-balance/(:any)', 'WithdrawalApplication::compute_balance/$1');
 
 $routes->get('notifications', 'Notifications::index');
 $routes->get('unread-notifications', 'Notifications::unread_notifications');

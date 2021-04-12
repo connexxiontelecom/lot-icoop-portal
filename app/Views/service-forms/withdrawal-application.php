@@ -57,7 +57,22 @@ $session = session();
                       </div>
                     </div>
                   </div>
-
+                  <div class="col-lg-5">
+                    <div class="card card-preview">
+                      <div class="card-inner">
+                        <div class="preview-block">
+                          <span class="preview-title-lg overline-title">Withdrawal Terms</span>
+                        </div>
+                        <div class="alert alert-icon alert-info mt-1 mb-1" role="alert" id="get-started">
+                          <em class="icon ni ni-alert-circle"></em> Please select a savings type to get started.
+                        </div>
+                        <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="withdraw-details" hidden>
+                          <em class="icon ni ni-alert-circle"></em> These are the details for your savings account
+                          <ul class="list list-sm list-checked" id="savings-details-list"></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -69,5 +84,6 @@ $session = session();
   </div>
 </div>
 <?php include(APPPATH.'/Views/_scripts.php'); ?>
+<?php include(APPPATH.'/Views/_withdrawal-application-script.php'); ?>
 </body>
 </html>
