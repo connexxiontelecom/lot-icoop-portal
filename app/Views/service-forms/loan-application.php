@@ -66,17 +66,17 @@ $session = session();
                               <div class="form-group">
                                 <label class="form-label font-weight-bolder" for="loan-amount">Loan Amount</label>
                                 <div class="form-control-wrap">
-                                  <input type="number" class="form-control" id="loan-amount" name="loan_amount" required disabled>
+                                  <input type="text" class="form-control number" id="loan-amount" name="loan_amount" required disabled>
                                   <div id="loan-amount-note" class="form-note"></div>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label class="form-label font-weight-bolder">File Attachment (PDF)</label>
+                                <label class="form-label font-weight-bolder">File Attachment</label>
                                 <div class="form-control-wrap">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="loan-attachment" name="loan_attachment" accept="application/pdf" disabled>
+                                    <input type="file" class="custom-file-input" id="loan-attachment" name="loan_attachment" disabled>
                                     <label class="custom-file-label" for="loan-attachment">Choose file</label>
                                   </div>
                                 </div>
@@ -113,6 +113,7 @@ $session = session();
                       </div>
                     </div>
                   </div>
+
                   <div class="col-lg-5">
                     <div class="card card-preview">
                       <div class="card-inner">
@@ -122,11 +123,9 @@ $session = session();
                         <div class="alert alert-icon alert-info mt-1 mb-1" role="alert" id="get-started">
                           <em class="icon ni ni-alert-circle"></em> Please select a loan type to get started.
                         </div>
-                        <!--@TODO display loan setup details here-->
                         <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="loan-details" hidden>
                           <em class="icon ni ni-alert-circle"></em> These are the details for your selected loan
-                          <ul class="list list-sm list-checked" id="loan-details-list">
-                          </ul>
+                          <ul class="list list-sm list-checked" id="loan-details-list"></ul>
                         </div>
                         <!--qualification age-->
                         <div class="alert alert-icon alert-success mt-1 mb-1" role="alert" id="qualification-age-passed" hidden>

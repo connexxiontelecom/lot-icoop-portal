@@ -60,17 +60,10 @@ class LoanApplication extends BaseController {
             $file = $this->request->getFile('loan_attachment');
             if (!empty($file)) {
               if ($file->isValid() && !$file->hasMoved()) {
-                $extension = $file->guessExtension();
-                $extension = strtolower($extension);
-                if($extension == 'pdf'){
-                  $filename = $file->getRandomName();
-                  $file->move('uploads/loan-attachments', $filename);
-                  // @TODO send file to admin service
-                } else {
-                  $response_data['success'] = false;
-                  $response_data['msg'] = 'Please submit your loan attachment as a PDF';
-                  return $this->response->setJSON($response_data);
-                }
+//                $extension = $file->guessExtension();
+                $filename = $file->getRandomName();
+                $file->move('uploads/loan-attachments', $filename);
+                // @TODO send file to admin service
               }
             }
             $response_data = $this->_submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename);

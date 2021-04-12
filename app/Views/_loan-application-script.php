@@ -137,8 +137,9 @@
     $(document).on('keyup', '#loan-amount', function(e) {
       e.preventDefault()
       let selectedLoanAmount = $(this).val()
+      selectedLoanAmount = +(selectedLoanAmount.replace(/,/g, ''))
       if (selectedLoanAmount) {
-        if (parseInt(selectedLoanAmount) >= loanMinCreditLimit && parseInt(selectedLoanAmount) <= loanMaxCreditLimit) {
+        if (selectedLoanAmount >= loanMinCreditLimit && selectedLoanAmount <= loanMaxCreditLimit) {
           $('#loan-amount-passed').attr('hidden', false)
           $('#loan-amount-failed').attr('hidden', true)
         } else {
