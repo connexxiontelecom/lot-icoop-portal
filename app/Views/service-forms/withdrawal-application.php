@@ -39,7 +39,7 @@ $session = session();
                           <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <label for="savings-type" class="form-label font-weight-bolder">Savings Type</label>
+                                <label for="savings-type" class="form-label font-weight-bold">Savings Type <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <select name="savings_type" id="savings-type" class="form-select form-control">
                                     <option value="default">Default Value</option>
@@ -49,6 +49,14 @@ $session = session();
                                       </option>
                                     <?php endforeach; endif;?>
                                   </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label for="withdrawal-amount" class="form-label font-weight-bold">Withdrawal Amount <span class="text-danger"> *</span></label>
+                                <div class="form-control-wrap">
+                                  <input type="text" class="form-control number" id="withdrawal-amount" name="withdrawal_amount" required disabled>
                                 </div>
                               </div>
                             </div>
@@ -67,8 +75,16 @@ $session = session();
                           <em class="icon ni ni-alert-circle"></em> Please select a savings type to get started.
                         </div>
                         <div class="alert alert-icon alert-secondary mt-1 mb-1" role="alert" id="withdraw-details" hidden>
-                          <em class="icon ni ni-alert-circle"></em> These are the details for your savings account
-                          <ul class="list list-sm list-checked" id="savings-details-list"></ul>
+                          <em class="icon ni ni-alert-circle"></em> These are the withdrawal details for your savings account
+                          <ul class="list list-sm list-checked pt-2" id="savings-details-list"></ul>
+                        </div>
+                        <!--withdrawal amount-->
+                        <div class="alert alert-icon alert-success mt-1 mb-1" role="alert" id="withdrawal-amount-passed" hidden>
+                          <em class="icon ni ni-check-circle"></em> Your selected withdrawal amount is valid.
+                          <div class="mt-1" id="withdrawal-amount-details"></div>
+                        </div>
+                        <div class="alert alert-icon alert-warning mt-1 mb-1" role="alert" id="withdrawal-amount-failed" hidden>
+                          <em class="icon ni ni-alert-circle"></em><span class="font-weight-bolder">We're Sorry</span>. Your withdrawal amount exceeds the amount you can withdraw.
                         </div>
                       </div>
                     </div>
