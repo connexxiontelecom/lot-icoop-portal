@@ -79,6 +79,7 @@
       } else {
         const formData = new FormData(this)
         formData.set('withdrawal_amount', formData.get('withdrawal_amount').replace(/,/g, ''))
+        formData.append('withdrawable_amount', withdrawableAmount)
         Swal.fire({
           title: 'Are you sure?',
           text: 'Applying for a withdrawal is irreversible',
@@ -87,7 +88,21 @@
           confirmButtonText: 'Confirm Withdrawal'
         }).then(function (confirm) {
           if (confirm.value) {
-            Swal.fire('Confirmed!', 'data.msg', 'success')
+            $.ajax({
+              url: '<?=site_url('withdrawal-application/submit-application')?>',
+              type: 'post',
+              data: formData,
+              success: function (data) {
+                if (data.success) {
+                  Swal.fire('Confirmed!', data.msg, 'success').then(() => location.reload())
+                } else {
+                  Swal.fire('Sorry!', data.msg, 'error')
+                }
+              },
+              cache: false,
+              contentType: false,
+              processData: false
+            })
           }
         })
       }

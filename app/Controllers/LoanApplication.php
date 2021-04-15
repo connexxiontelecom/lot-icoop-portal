@@ -154,12 +154,17 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  private function _submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename): array {
+  private function  _submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename): array {
     $staff_id = $this->session->get('staff_id');
     $firstname = $this->session->get('firstname');
     $lastname = $this->session->get('lastname');
     $othername = $this->session->get('othername');
     $response_data = array();
+    if (!$loan_setup_id || $loan_setup_id == 'default') {
+      $response_data['success'] = false;
+      $response_data['msg'] = 'The loan type is required';
+      return $response_data;
+    }
     $loan_setup_details = $this->loanSetupModel->find($loan_setup_id);
     // @TODO do all checks in here and submit loan application
     if ($loan_setup_details) {
