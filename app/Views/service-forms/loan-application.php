@@ -32,7 +32,7 @@ $session = session();
                   <div class="col-lg-7">
                     <div class="card card-preview">
                       <div class="card-inner">
-                        <form enctype="multipart/form-data" action="<?=site_url('loan-application/submit-application')?>" method="post" class="form-validate" id="loan-application">
+                        <form enctype="multipart/form-data" class="form-validate" id="loan-application">
                           <div class="preview-block">
                             <span class="preview-title-lg overline-title">Loan Details</span>
                           </div>
@@ -105,7 +105,7 @@ $session = session();
                             </div>
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <button class="btn btn-lg btn-primary">Submit Application</button>
+                                <button class="btn btn-primary">Submit Application</button>
                               </div>
                             </div>
                           </div>
