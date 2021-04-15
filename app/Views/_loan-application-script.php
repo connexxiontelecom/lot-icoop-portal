@@ -222,13 +222,12 @@
     // loan application form submission
     $('form#loan-application').submit(function (e) {
       e.preventDefault()
-      const formData = new FormData(this)
-      formData.set('loan_amount', formData.get('loan_amount').replace(/,/g, ''))
-      console.log(formData.get('loan_amount'))
       let loanType = $('#loan-type').val()
       if (!loanType || loanType === 'default') {
         Swal.fire("Invalid Submission", "Please select a valid loan type!", "error");
       } else {
+        const formData = new FormData(this)
+        formData.set('loan_amount', formData.get('loan_amount').replace(/,/g, ''))
         Swal.fire({
           title: 'Are you sure?',
           text: 'Applying for a loan is irreversible',
