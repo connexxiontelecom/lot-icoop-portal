@@ -14,13 +14,13 @@
             if (response.success) {
               console.log(response)
               let encumberedAmount = response.encumbered_amount
-              let savingsBalance = response.savings_balance
-              let withdrawalBalance = response.withdrawal_balance
+              let savingsAmount = response.savings_amount
+              let withdrawableAmount = response.withdrawable_amount
 
               $('#savings-details-list').html(`
-                <li>Savings Balance ${savingsBalance}</li>
-                <li>Withdrawal Balance ${withdrawalBalance}</li>
+                <li>Withdrawal Balance ${withdrawableAmount}</li>
                 <li>Encumbered Amount ${encumberedAmount}</li>
+                <li>Savings Amount ${savingsAmount}</li>
               `)
             }
             $('#get-started').attr('hidden', true)
