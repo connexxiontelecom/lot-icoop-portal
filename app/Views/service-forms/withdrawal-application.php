@@ -32,7 +32,7 @@ $session = session();
                   <div class="col-lg-7">
                     <div class="card card-preview">
                       <div class="card-inner">
-                        <form action="" class="form-validate" id="withdrawal-application">
+                        <form class="form-validate" id="withdrawal-application">
                           <div class="preview-block">
                             <span class="preview-title-lg overline-title">Withdrawal Details</span>
                           </div>
@@ -58,6 +58,22 @@ $session = session();
                                 <div class="form-control-wrap">
                                   <input type="text" class="form-control number" id="withdrawal-amount" name="withdrawal_amount" required disabled>
                                 </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label class="form-label font-weight-bolder">File Attachment <span class="text-danger"> *</span></label>
+                                <div class="form-control-wrap">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="withdrawal-attachment" name="withdrawal_attachment" required disabled>
+                                    <label class="custom-file-label" for="withdrawal-attachment">Choose file</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group mt-3">
+                                <button class="btn btn btn-primary">Submit Application</button>
                               </div>
                             </div>
                           </div>

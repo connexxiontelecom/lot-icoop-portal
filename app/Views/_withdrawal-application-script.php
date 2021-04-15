@@ -21,7 +21,7 @@
               encumberedAmount = response.encumbered_amount
               savingsAmount = response.savings_amount
               withdrawableAmount = response.withdrawable_amount
-              withdrawalCharge = response.withdrawal_charge
+              withdrawalCharge = +(response.withdrawal_charge)
 
               $('#savings-details-list').html(`
                 <li>Withdrawable Amount <strong class="float-right font-weight-bold">${withdrawableAmount.toLocaleString()}</strong></li>
@@ -32,6 +32,7 @@
             $('#get-started').attr('hidden', true)
             $('#withdraw-details').attr('hidden', false)
             $('#withdrawal-amount').attr('disabled', false)
+            $('#withdrawal-attachment').attr('disabled', false)
           }
         })
       } else if (savingsType === 'default') {
@@ -39,6 +40,7 @@
         $('#get-started').attr('hidden', false)
         $('#withdraw-details').attr('hidden', true)
         $('#withdrawal-amount').attr('disabled', true)
+        $('#withdrawal-attachment').attr('disabled', true)
       }
     })
 
@@ -68,5 +70,28 @@
         $('#withdrawal-amount-details').html(``)
       }
     })
+
+    $('form#withdrawal-application').submit(function (e) {
+      e.preventDefault()
+      let savingsType = $('#savings-type').val()
+      if (!savingsType || savingsType === 'default'){
+        Swal.fire("Invalid Submission", "Please select a valid savings type!", "error");
+      } else {
+        const formData = new FormData(this)
+        formData.set('withdrawal_amount', formData.get('withdrawal_amount').replace(/,/g, ''))
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Applying for a withdrawal is irreversible',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Confirm Withdrawal'
+        }).then(function (confirm) {
+          if (confirm.value) {
+            Swal.fire('Confirmed!', 'data.msg', 'success')
+          }
+        })
+      }
+    })
+
   })
 </script>
