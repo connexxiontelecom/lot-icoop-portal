@@ -1,6 +1,4 @@
-echo "Hi CJ..."
-echo "This to your code commit shell script."
-echo "You created me to simplify your life. See status below"
+echo "Code Commit v1"
 git status
 echo "Which of these file(s) are you staging"
 read -r files
