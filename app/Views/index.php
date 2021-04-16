@@ -52,11 +52,11 @@
                               <div class="nk-wg7-stats-group">
                                 <div class="nk-wg7-stats w-100">
                                   <div class="nk-wg7-title">Encumbered Savings</div>
-                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 50,000,000.00</div>
+                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> <?=number_format($encumbered_amount, 2)?></div>
                                 </div>
                                 <div class="nk-wg7-stats w-100">
                                   <div class="nk-wg7-title">Free Savings</div>
-                                  <div class="number"><em class="icon ni ni-sign-kobo"></em> 34,000,405.00</div>
+                                  <div class="number"><em class="icon ni ni-sign-kobo"></em><?=number_format($session->get('regular_savings') - $encumbered_amount, 2)?></div>
                                 </div>
                               </div>
                               <div class="nk-wg7-foot mt-4">
