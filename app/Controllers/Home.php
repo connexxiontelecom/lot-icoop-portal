@@ -12,6 +12,7 @@ class Home extends BaseController {
 			$page_data['pending_loans'] = $this->_count_pending_approved_loans(0);
 			$page_data['approved_loans'] = $this->_count_pending_approved_loans(1);
 			$page_data['disbursed_loans'] = $this->_count_disbursed_loans();
+			$page_data['encumbered_amount'] = $this->_get_encumbered_amount();
 			return view('index', $page_data);
 		}
 	  return redirect('auth/login');
@@ -49,4 +50,18 @@ class Home extends BaseController {
 		}
 		return $result;
 	}
+
+	private function _get_encumbered_amount() {
+	  $staff_id = $this->session->get('staff_id');
+	  $encumbered_amount = 0;
+    $active_loans = $this->loanModel->where([
+      'staff_id' => $staff_id,
+      'paid_back' => 0,
+      'disburse' => 1
+    ])->findAll();
+    foreach ($active_loans as $active_loan) {
+      $encumbered_amount += $active_loan['encumbrance_amount'];
+    }
+    return $encumbered_amount;
+  }
 }
