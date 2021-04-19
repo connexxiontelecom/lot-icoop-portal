@@ -233,13 +233,8 @@ $loan_detail = $loan_details[0];
                         </tr>
                       <?php $sn++; endforeach; endif;?>
                       <tr class="tb-tnx-item font-weight-bolder">
-                        <td><?=$sn?></td>
-                        <td>
-                          <?php
-                            $date = date_create();
-                            echo date_format($date, 'd M Y');
-                          ?>
-                        </td>
+                        <td>-</td>
+                        <td></td>
                         <td>Total</td>
                         <td class="text-right">
                           <?=number_format($total_dr, 2);?>

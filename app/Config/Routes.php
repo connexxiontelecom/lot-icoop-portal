@@ -41,6 +41,7 @@ $routes->get('outstanding-loans', 'OutstandingLoans::index');
 $routes->get('outstanding-loans/view-outstanding-loan/(:num)', 'OutstandingLoans::view_outstanding_loan/$1');
 
 $routes->get('finished-loans', 'FinishedLoans::index');
+$routes->get('finished-loans/view-finished-loan/(:num)', 'FinishedLoans::view_finished_loan/$1');
 
 $routes->get('loan-application', 'LoanApplication::index');
 $routes->get('loan-application/get-loan-setup-details/(:any)', 'LoanApplication::get_loan_setup_details/$1');

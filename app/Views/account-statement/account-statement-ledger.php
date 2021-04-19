@@ -214,18 +214,8 @@
                           </tr>
                         <?php $sn++; endforeach; endif;?>
                         <tr class="border-primary">
-                          <td class="font-weight-bolder"><?=$sn?></td>
-                          <td class="font-weight-bolder">
-	                          <?php
-                              if (isset($end_date)) {
-                                $date = date_create($end_date);
-                                echo date_format($date, 'd M Y');
-                              } else {
-                                $date = date_create();
-                                echo date_format($date, 'd M Y');
-                              }
-	                          ?>
-                          </td>
+                          <td class="font-weight-bolder">-</td>
+                          <td class="font-weight-bolder"></td>
                           <td class="font-weight-bolder">
                             Total
                           </td>
