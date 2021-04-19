@@ -64,7 +64,7 @@ $session = session();
                               <?=number_format(0, 2)?>
                             </td>
                             <td class="text-right">
-                              <a href="<?=site_url('outstanding-loans/view-outstanding-loan/'.$finished_loan['loan_id'])?>" class="btn btn-icon btn-trigger">
+                              <a href="<?=site_url('finished-loans/view-finished-loan/'.$finished_loan['loan_id'])?>" class="btn btn-icon btn-trigger">
                                 <em class="icon ni ni-more-h"></em>
                               </a>
                             </td>
