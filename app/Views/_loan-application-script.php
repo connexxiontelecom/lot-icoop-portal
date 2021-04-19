@@ -1,8 +1,5 @@
 <?php $session = session()?>
-<!-- jQuery UI CSS -->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<!-- jQuery UI JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 <script>
   let loanDuration = 0
   let loanMaxCreditLimit = 0

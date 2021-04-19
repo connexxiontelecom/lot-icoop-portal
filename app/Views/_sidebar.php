@@ -148,7 +148,7 @@
                   <a href="/withdrawal-application" class="nk-menu-link"><span class="nk-menu-text">Withdrawal Application</span></a>
                 </li>
                 <li class="nk-menu-item">
-                  <a href="#" class="nk-menu-link"><span class="nk-menu-text">Savings Variation</span></a>
+                  <a href="/savings-variation" class="nk-menu-link"><span class="nk-menu-text">Savings Variation</span></a>
                 </li>
                 <li class="nk-menu-item">
                   <a href="#" class="nk-menu-link"><span class="nk-menu-text">Closure Form</span></a>
