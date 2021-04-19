@@ -74,8 +74,12 @@
     $('form#withdrawal-application').submit(function (e) {
       e.preventDefault()
       let savingsType = $('#savings-type').val()
+      let withdrawalAmount = $('#withdrawal-amount').val()
+      let withdrawalAttachment = $('#withdrawal-attachment').val()
       if (!savingsType || savingsType === 'default'){
         Swal.fire("Invalid Submission", "Please select a valid savings type!", "error");
+      } else if (!withdrawalAmount || !withdrawalAttachment) {
+        Swal.fire("Invalid Submission", "Please fill in all required fields!", "error");
       } else {
         const formData = new FormData(this)
         formData.set('withdrawal_amount', formData.get('withdrawal_amount').replace(/,/g, ''))
