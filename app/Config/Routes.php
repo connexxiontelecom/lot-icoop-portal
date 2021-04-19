@@ -54,6 +54,8 @@ $routes->get('withdrawal-application', 'WithdrawalApplication::index');
 $routes->get('withdrawal-application/compute-balance/(:any)', 'WithdrawalApplication::compute_balance/$1');
 $routes->post('withdrawal-application/submit-application', 'WithdrawalApplication::submit_withdrawal_application');
 
+$routes->get('savings-variation', 'SavingsVariation::index');
+
 $routes->get('notifications', 'Notifications::index');
 $routes->get('unread-notifications', 'Notifications::unread_notifications');
 $routes->get('get-user-notifications', 'Notifications::get_user_notifications');
