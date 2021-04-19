@@ -21,24 +21,36 @@ class LoanApplication extends BaseController {
     return redirect('auth/login');
   }
 
-  function get_guarantor_cooperators() {
-    if ($this->session->active) {
-      $post_data = $this->request->getPost();
-      $staff_id = $this->session->get('staff_id');
-      $response_data = array();
-      if ($post_data) {
-        $cooperators = $this->cooperatorModel->search_cooperators($post_data['search']);
-        $guarantor_1 = $post_data['guarantor1'];
-        foreach ($cooperators as $cooperator) {
-          $guarantor_id = explode(',', $guarantor_1)[0];
-          if ($cooperator->cooperator_staff_id != $staff_id && $cooperator->cooperator_staff_id != $guarantor_id) {
-            $response_data[] = $cooperator->cooperator_staff_id . ', ' . $cooperator->cooperator_first_name . ' ' . $cooperator->cooperator_last_name;
+  function check_guarantor() {
+    $staff_id = $this->session->get('staff_id');
+    $response_data = array();
+    // @TODO check that $cooperator_id != $staff_id and check if the same guarantor has been selected.
+    $post_data = $this->request->getPost();
+    if ($post_data) {
+      $guarantor_1 = $post_data['guarantor1'];
+      $guarantor_2 = $post_data['guarantor2'];
+      $type = $post_data['type'];
+      $cooperator = null;
+      switch ($type) {
+        case 'guarantor1':
+          if ($guarantor_1 != $guarantor_2) {
+            $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $guarantor_1)->first();
           }
-        }
+          break;
+        case 'guarantor2':
+          if ($guarantor_2 != $guarantor_1) {
+            $cooperator = $this->cooperatorModel->where('cooperator_staff_id', $guarantor_2)->first();
+          }
+          break;
       }
-      return $this->response->setJSON($response_data);
+      if ($cooperator) {
+        $response_data['success'] = true;
+        $response_data['guarantor'] = $cooperator;
+      } else {
+        $response_data['success'] = false;
+      }
     }
-    return redirect('auth/login');
+    return $this->response->setJSON($response_data);
   }
 
   function submit_loan_application() {
@@ -58,13 +70,15 @@ class LoanApplication extends BaseController {
             $guarantor_2 = $post_data['guarantor_2'];
             $filename = null;
             $file = $this->request->getFile('loan_attachment');
-            if (!empty($file)) {
-              if ($file->isValid() && !$file->hasMoved()) {
+            if ($file->isValid() && !$file->hasMoved()) {
 //                $extension = $file->guessExtension();
-                $filename = $file->getRandomName();
-                $file->move('uploads/loan-attachments', $filename);
-                // @TODO send file to admin service
-              }
+              $filename = $file->getRandomName();
+              $file->move('uploads/loan-attachments', $filename);
+              // @TODO send file to admin service
+            } else {
+              $response_data['success'] = false;
+              $response_data['msg'] = 'The loan attachment is required';
+              return $this->response->setJSON($response_data);
             }
             $response_data = $this->_submit_loan_application($loan_setup_id, $loan_amount, $loan_duration, $guarantor_1, $guarantor_2, $filename);
             return $this->response->setJSON($response_data);

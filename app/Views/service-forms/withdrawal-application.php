@@ -41,7 +41,7 @@ $session = session();
                               <div class="form-group mt-3">
                                 <label for="savings-type" class="form-label font-weight-bold">Savings Type <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
-                                  <select name="savings_type" id="savings-type" class="form-select form-control">
+                                  <select name="savings_type" id="savings-type" class="form-select form-control" required>
                                     <option value="default">Default Value</option>
                                     <?php if (!empty($savings_types)): foreach ($savings_types as $savings_type):?>
                                       <option value="<?=$savings_type['contribution_type_id']?>">
