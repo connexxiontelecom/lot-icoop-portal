@@ -39,7 +39,7 @@ $session = session();
                           <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <label class="form-label font-weight-bolder" for="loan-type">Loan Type</label>
+                                <label class="form-label font-weight-bolder" for="loan-type">Loan Type <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <select class="form-select form-control" data-search="on" id="loan-type" name="loan_type" required>
                                     <option value="default">Default Option</option>
@@ -55,7 +55,7 @@ $session = session();
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label class="form-label font-weight-bolder" for="loan-duration">Loan Duration (Months)</label>
+                                <label class="form-label font-weight-bolder" for="loan-duration">Loan Duration (Months) <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <input type="number" class="form-control" id="loan-duration" name="loan_duration" required disabled>
                                   <div id="loan-duration-note" class="form-note"></div>
@@ -64,7 +64,7 @@ $session = session();
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label class="form-label font-weight-bolder" for="loan-amount">Loan Amount</label>
+                                <label class="form-label font-weight-bolder" for="loan-amount">Loan Amount <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <input type="text" class="form-control number" id="loan-amount" name="loan_amount" required disabled>
                                   <div id="loan-amount-note" class="form-note"></div>
@@ -73,10 +73,10 @@ $session = session();
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label class="form-label font-weight-bolder">File Attachment</label>
+                                <label class="form-label font-weight-bolder">File Attachment <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="loan-attachment" name="loan_attachment" disabled>
+                                    <input type="file" class="custom-file-input" id="loan-attachment" name="loan_attachment" required disabled>
                                     <label class="custom-file-label" for="loan-attachment">Choose file</label>
                                   </div>
                                 </div>
@@ -89,17 +89,19 @@ $session = session();
                           <div class="row gy-3">
                             <div class="col-12">
                               <div class="form-group mt-3">
-                                <label class="form-label font-weight-bolder" for="guarantor-1">1st Guarantor</label>
+                                <label class="form-label font-weight-bolder" for="guarantor-1">1st Guarantor (Staff ID) <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <input type="text" class="form-control" id="guarantor-1" name="guarantor_1" disabled>
+                                  <div id="guarantor-1-note" class="form-note"></div>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12">
                               <div class="form-group">
-                                <label class="form-label font-weight-bolder" for="guarantor-2">2nd Guarantor</label>
+                                <label class="form-label font-weight-bolder" for="guarantor-2">2nd Guarantor (Staff ID) <span class="text-danger"> *</span></label>
                                 <div class="form-control-wrap">
                                   <input type="text" class="form-control" id="guarantor-2" name="guarantor_2" disabled>
+                                  <div id="guarantor-2-note" class="form-note"></div>
                                 </div>
                               </div>
                             </div>
