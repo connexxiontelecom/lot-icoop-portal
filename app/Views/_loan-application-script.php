@@ -165,66 +165,76 @@
       }
     })
 
-    // autocomplete for guarantor one
-    $('#guarantor-1').autocomplete({
-      source: function (req, res) {
-        $.ajax({
-          url: '<?= site_url('loan-application/get-guarantors')?>',
-          type: 'post',
-          dataType: 'json',
-          data: {
-            search: req.term,
-            guarantor1: ''
-          },
-          success: function (data) {
-            console.log(data)
-            res(data)
+    $(document).on('blur', '#guarantor-1', function(e) {
+      e.preventDefault()
+      $('#guarantor-1-note').html(``)
+      let guarantor1 = $(this).val()
+      let guarantor2 = $('#guarantor-2').val()
+      $.ajax({
+        url: '<?=site_url('loan-application/check-guarantor')?>',
+        type: 'post',
+        dataType: 'json',
+        data: {
+          guarantor1,
+          guarantor2,
+          type: 'guarantor1'
+        },
+        success: function(data) {
+          if (data.success) {
+            $('#guarantor-1-note').html(`
+              1st Guarantor: <span class="font-weight-bold text-primary"> ${data.guarantor.cooperator_first_name} ${data.guarantor.cooperator_last_name} </span> will be notified
+            `)
+          } else {
+            $('#guarantor-1-note').html(`
+              <span class="font-weight-bold text-danger">We didn't find a cooperator with that Staff ID (or you've already chosen this cooperator)</span>
+            `)
           }
-        })
-      },
-      select: function (event, ui) {
-        $('#guarantor-1').val(ui.item.label)
-        return false
-      },
-      focus: function (event, ui) {
-        $('#guarantor-1').val(ui.item.label)
-        return false
-      }
+        }
+      })
     })
 
-    // autocomplete for guarantor two
-    $('#guarantor-2').autocomplete({
-      source: function (req, res) {
-        $.ajax({
-          url: '<?= site_url('loan-application/get-guarantors')?>',
-          type: 'post',
-          dataType: 'json',
-          data: {
-            search: req.term,
-            guarantor1: $('#guarantor-1').val()
-          },
-          success: function (data) {
-            console.log(data)
-            res(data)
+    $(document).on('blur', '#guarantor-2', function(e) {
+      e.preventDefault()
+      $('#guarantor-2-note').html(``)
+      let guarantor1 = $('#guarantor-1').val()
+      let guarantor2 = $(this).val()
+      $.ajax({
+        url: '<?=site_url('loan-application/check-guarantor')?>',
+        type: 'post',
+        dataType: 'json',
+        data: {
+          guarantor1,
+          guarantor2,
+          type: 'guarantor2'
+        },
+        success: function(data) {
+          if (data.success) {
+            $('#guarantor-2-note').html(`
+              2nd Guarantor: <span class="font-weight-bold text-primary"> ${data.guarantor.cooperator_first_name} ${data.guarantor.cooperator_last_name} </span> will be notified
+            `)
+          } else {
+            $('#guarantor-2-note').html(`
+              <span class="font-weight-bold text-danger">We didn't find a cooperator with that Staff ID (or you've already chosen this cooperator)</span>
+            `)
           }
-        })
-      },
-      select: function (event, ui) {
-        $('#guarantor-2').val(ui.item.label)
-        return false
-      },
-      focus: function (event, ui) {
-        $('#guarantor-2').val(ui.item.label)
-        return false
-      }
+        }
+      })
     })
 
     // loan application form submission
     $('form#loan-application').submit(function (e) {
       e.preventDefault()
       let loanType = $('#loan-type').val()
+      let loanDuration = $('#loan-duration').val()
+      let loanAmount = $('#loan-amount').val()
+      let loanAttachment = $('#loan-attachment').val()
+      let guarantor1 = $('#guarantor-1').val()
+      let guarantor2 = $('#guarantor-2').val()
+
       if (!loanType || loanType === 'default') {
         Swal.fire("Invalid Submission", "Please select a valid loan type!", "error");
+      } else if (!loanDuration || !loanAmount || !loanAttachment || !guarantor1 || !guarantor2) {
+        Swal.fire("Invalid Submission", "Please fill in all required fields!", "error");
       } else {
         const formData = new FormData(this)
         formData.set('loan_amount', formData.get('loan_amount').replace(/,/g, ''))
