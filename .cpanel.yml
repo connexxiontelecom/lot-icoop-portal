@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/connexxtel/icoop-portal.connexxiontelecom.com/
+    - export DEPLOYPATH=/home/icoopadmin/lawofficersthrift.icoop.ng/
     - /bin/cp -R * $DEPLOYPATH
