@@ -12215,7 +12215,7 @@ p > span > .icon.ni { vertical-align: middle; }
 
 .nk-auth-footer-full { margin-top: 0; }
 
-@media (min-width: 992px) { .nk-auth-container { width: 45%; } }
+@media (min-width: 992px) { .nk-auth-container { width: 35%; } }
 
 @media (min-width: 1540px) { .nk-split .nk-auth-body, .nk-split .nk-auth-footer { margin-right: 90px; } }
 
